@@ -403,7 +403,7 @@
                 for (var i = 0; i < player.length; i++) {
                     if (i > 0) permaParam += "&";
                     permaParam += "video" + i + "=" + startVideo[i] +
-                        "&time" + i + "=" + startTime[i];
+                        "&start" + i + "=" + startTime[i];
                 }
                 perma.value = website + "?" + permaParam;
             }
