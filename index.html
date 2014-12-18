@@ -165,11 +165,11 @@
 					if (tempParam.start0) startTime[0] = tempParam.start0;
 					if (tempParam.start1) startTime[1] = tempParam.start1;*/
                 for (var i = 0; i < startVideo.length; i++) {
-                    if (tempParam.length) {
-                        if (tempParam['video' + i]) startVideo[i] = tempParam['video' + i];
-                        if (tempParam['start' + i]) startTime[i] = tempParam['start' + i];
-                        if (tempParam['volume' + i]) volume[i] = tempParam['volume' + i];
-                    }
+                    //if (tempParam.length) {
+                        if (tempParam['video' + i].length) startVideo[i] = tempParam['video' + i];
+                        if (tempParam['start' + i].length) startTime[i] = tempParam['start' + i];
+                        if (tempParam['volume' + i].length) volume[i] = tempParam['volume' + i];
+                    //}
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
                         width: '100%',
