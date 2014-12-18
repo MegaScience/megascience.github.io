@@ -123,7 +123,7 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 0;
+            var debug = 1;
             var player = [];
             var startTime = [1, 0];
             var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
@@ -152,6 +152,7 @@
             var doubler = document.getElementById("doubler");
             var perma = document.getElementById("perma");
             var volumeBut = [document.getElementById("volumeBut0"), document.getElementById("volumeBut1")];
+			var tempParam = paramArray(window.location.href);
             var playerEvents = {
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -159,7 +160,6 @@
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
-                var tempParam = paramArray(window.location.href);
                 /*	if (tempParam.video0) startVideo[0] = tempParam.video0;
 					if (tempParam.video1) startVideo[1] = tempParam.video1;
 					if (tempParam.start0) startTime[0] = tempParam.start0;
