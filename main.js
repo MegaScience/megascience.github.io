@@ -10,9 +10,9 @@ var player = [];
 var startTime = [1, 0];
 var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
 var video = [document.getElementById("video0"), document.getElementById("video1")];
-var time = [];
-/*for (var i = 0; i < player.length; i++) {
-    time.push({
+//var time = [];
+/*for (var i = 0; i < window.player.length; i++) {
+    window.time.push({
         'h': document.getElementById("time" + i + "h"),
             'm': document.getElementById("time" + i + "m"),
             's': document.getElementById("time" + i + "s")
@@ -41,18 +41,18 @@ function onYouTubeIframeAPIReady() {
     if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
     if (window.location.href.length) {
         var tempParam = paramArray(window.location.href);
-        if (tempParam.video0) startVideo[0] = tempParam.video0;
-        if (tempParam.video1) startVideo[1] = tempParam.video1;
-        if (tempParam.start0) startTime[0] = tempParam.start0;
-        if (tempParam.start1) startTime[1] = tempParam.start1;
+        if (tempParam.video0) window.startVideo[0] = tempParam.video0;
+        if (tempParam.video1) window.startVideo[1] = tempParam.video1;
+        if (tempParam.start0) window.startTime[0] = tempParam.start0;
+        if (tempParam.start1) window.startTime[1] = tempParam.start1;
     }
-    for (var i = 0; i < startVideo.length; i++) {
-        player.push(new YT.Player('player' + i, {
+    for (var i = 0; i < window.startVideo.length; i++) {
+        window.player.push(new YT.Player('player' + i, {
             height: '100%',
             width: '100%',
-            videoId: startVideo[i],
+            videoId: window.startVideo[i],
             playerVars: {
-                'start': startTime[i],
+                'start': window.startTime[i],
                     'controls': 0,
                     'showinfo': 0,
                     'rel': 0,
@@ -60,9 +60,9 @@ function onYouTubeIframeAPIReady() {
             },
             events: playerEvents
         }));
-        //time[i].value = startTime[i];
+        //time[i].value = window.startTime[i];
         sToHMS(startTime[i], i);
-        video[i].value = startVideo[i];
+        window.video[i].value = window.startVideo[i];
     }
     writePerma();
 }
@@ -77,14 +77,14 @@ function onPlayerStateChange(event) {
     switch (event.data) {
         case YT.PlayerState.ENDED:
             //stopVideos(event, 1);
-            stopState = 1;
+            window.stopState = 1;
             stopVideos(event, 1);
-            playPause.value = "Play";
+            window.playPause.value = "Play";
             break;
         case YT.PlayerState.PLAYING:
             //if (!done) {
                 //setTimeout(stopVideos, 6000);		
-            //    done = true;
+            //    window.done = true;
             //} else {
             //    playVideos(event);
             //}
@@ -104,79 +104,79 @@ function onPlayerStateChange(event) {
 function toggleVideos() {
     if (playPause.value == "Pause") {
         pauseVideos();
-        playPause.value = "Play";
+        window.playPause.value = "Play";
     } else if (playPause.value == "Play") {
         playVideos();
-        playPause.value = "Pause";
+        window.playPause.value = "Pause";
     } else {
         if (debug) console.log("Side-by-Side Player: Toggle broken. Defaulting.");
         pauseVideos();
-        playPause.value = "Play";
+        window.playPause.value = "Play";
     }
 }
 
 function toggleMute(c) {
     if (mute[c].value == "Mute") {
-        player[c].mute();
-        mute[c].value = "Unmute";
+        window.player[c].mute();
+        window.mute[c].value = "Unmute";
     } else if (mute[c].value == "Unmute") {
-        player[c].unMute();
-        mute[c].value = "Mute";
+        window.player[c].unMute();
+        window.mute[c].value = "Mute";
     } else {
-        if (debug) console.log("Side-by-Side Player: Mute broken. Defaulting.");
-        player[c].mute();
-        mute[c].value = "Unmute";
+        if (debug) console.log("Side-by-Side Player: window.Mute broken. Defaulting.");
+        window.player[c].mute();
+        window.mute[c].value = "Unmute";
     }
 }
 
 function playVideos(event) {
     var state;
-    for (var i = 0; i < player.length; i++) {
-        state = player[i].getPlayerState();
-        if (event && event.target == player[i] || (state == 1)) continue;
+    for (var i = 0; i < window.player.length; i++) {
+        state = window.player[i].getPlayerState();
+        if (event && event.target == window.player[i] || (state == 1)) continue;
         /*if (stopState)
-			player[i].seekTo(time[i].value, !0);
+			window.player[i].seekTo(time[i].value, !0);
 		else
-		    player[i].playVideo();*/
-        player[i].playVideo();
-        if (stopState) player[i].seekTo(getSec(i), !0);
-        //player[i].seekTo(player[i].getCurrentTime() + time[i].value, !0);
+		    window.player[i].playVideo();*/
+        window.player[i].playVideo();
+        if (stopState) window.player[i].seekTo(getSec(i), !0);
+        //player[i].seekTo(player[i].getCurrentTime() + window.time[i].value, !0);
     }
-    stopState = 0;
+    window.stopState = 0;
 }
 
 function pauseVideos(event) {
     var state;
-    for (var i = 0; i < player.length; i++) {
-        state = player[i].getPlayerState();
-        if (event && event.target == player[i] || (state != 1)) continue;
-        player[i].pauseVideo();
+    for (var i = 0; i < window.player.length; i++) {
+        state = window.player[i].getPlayerState();
+        if (event && event.target == window.player[i] || (state != 1)) continue;
+        window.player[i].pauseVideo();
     }
 }
 
 //function stopVideos(event, seek) {
 function stopVideos(event) {
     var state;
-    for (var i = 0; i < player.length; i++) {
-        state = player[i].getPlayerState();
-        if (event && event.target == player[i] || (state == -1 || state === 0)) continue;
-        //if (seek) player[i].seekTo(time[i].value, !0);
+    for (var i = 0; i < window.player.length; i++) {
+        state = window.player[i].getPlayerState();
+        if (event && event.target == window.player[i] || (state == -1 || state === 0)) continue;
+        //if (seek) window.player[i].seekTo(time[i].value, !0);
         //player[i].stopVideo();
-        player[i].seekTo(player[i].getDuration(), !0);
+        window.player[i].seekTo(player[i].getDuration(), !0);
     }
 }
 
 function setTimes() {
-    for (var i = 0; i < player.length; i++) {
-        startTime[i] = processTime(i);
-        player[i].seekTo(startTime[i], !0);
+    for (var i = 0; i < window.player.length; i++) {
+        window.startTime[i] = processTime(i);
+        window.player[i].seekTo(startTime[i], !0);
         writePerma();
     }
 }
 
 function setVideos() {
-    for (var i = 0; i < player.length; i++) {
-        if (debug) console.log("Side-by-Side Player: Value" + i + " - " + video[i].value);
+    for (var i = 0; i < window.player.length; i++) {
+        if (debug) console.log("Side-by-Side Player: Value" + i + " - " + window.video[i].value);
         var parts = parseVideoID(video[i].value);
         if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
         var tempVideo = parts.id;
@@ -185,12 +185,12 @@ function setVideos() {
         if (debug) console.log("Side-by-Side Player: Time" + i + " - " + tempTime);
         //startTime[i] = processTime(i);
         if (tempVideo !== undefined) {
-            player[i].loadVideoById(tempVideo, tempTime, "default");
-            video[i].value = startVideo[i] = tempVideo;
-            //time[i].value = startTime[i] = tempTime;
+            window.player[i].loadVideoById(tempVideo, tempTime, "default");
+            window.video[i].value = window.startVideo[i] = tempVideo;
+            //time[i].value = window.startTime[i] = tempTime;
             sToHMS(tempTime, i);
-            startTime[i] = tempTime;
-            playPause.value = "Pause";
+            window.startTime[i] = tempTime;
+            window.playPause.value = "Pause";
             writePerma();
         }
     }
@@ -198,7 +198,7 @@ function setVideos() {
 
 function processTime(n) {
     var tempTime = getSec(n);
-    if (!isNumber(tempTime)) tempTime = startTime[n];
+    if (!isNumber(tempTime)) tempTime = window.startTime[n];
     return tempTime;
 }
 
@@ -224,8 +224,8 @@ function parseVideoID(string) {
     if (videoID) {
         if (parameters.start) tTime = Number(parameters.start);
         else if (parameters.t) tTime = hmsToS(parameters.t);
-        if (debug) console.log("Side-by-Side Player: Time Parameter - " + parameters.t);
-        if (debug) console.log("Side-by-Side Player: Video Parameter - " + videoID);
+        if (debug) console.log("Side-by-Side Player: window.Time Parameter - " + parameters.t);
+        if (debug) console.log("Side-by-Side Player: window.Video Parameter - " + videoID);
         return {
             'id': videoID,
                 'time': tTime
@@ -253,7 +253,7 @@ function isNumber(n) {
 }
 
 function processDoubler() {
-    //var parameters = doubler.value.split("?")[1].split("&");
+    //var parameters = window.doubler.value.split("?")[1].split("&");
     var parameters = paramArray(doubler.value);
     video0.value = parseVideoID(parameters.video1).id;
     video1.value = parseVideoID(parameters.video2).id;
@@ -286,19 +286,19 @@ function sToHMS(sec, i) {
     var m = Math.floor((sec_num - (h * 3600)) / 60);
     var s = sec_num - (h * 3600) - (m * 60);
 
-    time[i].h.value = h;
-    time[i].m.value = m;
-    time[i].s.value = s;
+    window.time[i].h.value = h;
+    window.time[i].m.value = m;
+    window.time[i].s.value = s;
 }
 
 function writePerma() {
     var website = window.location.href;
     if (website.indexOf("?") > -1) website = website.split("?")[0];
     var permaParam = "";
-    for (var i = 0; i < player.length; i++) {
+    for (var i = 0; i < window.player.length; i++) {
         if (i > 0) permaParam += "&";
-        permaParam += "video" + i + "=" + startVideo[i] +
-            "&start" + i + "=" + startTime[i];
+        permaParam += "video" + i + "=" + window.startVideo[i] +
+            "&start" + i + "=" + window.startTime[i];
     }
-    perma.value = website + "?" + permaParam;
+    window.perma.value = website + "?" + permaParam;
 }
