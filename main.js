@@ -38,7 +38,7 @@ var playerEvents = {
 };
 
 function onYouTubeIframeAPIReady() {
-    if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
+    if (window.debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
     if (window.location.href.length) {
         var tempParam = paramArray(window.location.href);
         if (tempParam.video0) window.startVideo[0] = tempParam.video0;
@@ -61,7 +61,7 @@ function onYouTubeIframeAPIReady() {
             events: playerEvents
         }));
         //time[i].value = window.startTime[i];
-        sToHMS(startTime[i], i);
+        sToHMS(window.startTime[i], i);
         window.video[i].value = window.startVideo[i];
     }
     writePerma();
@@ -102,28 +102,28 @@ function onPlayerStateChange(event) {
 }
 
 function toggleVideos() {
-    if (playPause.value == "Pause") {
+    if (window.playPause.value == "Pause") {
         pauseVideos();
         window.playPause.value = "Play";
-    } else if (playPause.value == "Play") {
+    } else if (window.playPause.value == "Play") {
         playVideos();
         window.playPause.value = "Pause";
     } else {
-        if (debug) console.log("Side-by-Side Player: Toggle broken. Defaulting.");
+        if (window.debug) console.log("Side-by-Side Player: Toggle broken. Defaulting.");
         pauseVideos();
         window.playPause.value = "Play";
     }
 }
 
 function toggleMute(c) {
-    if (mute[c].value == "Mute") {
+    if (window.mute[c].value == "Mute") {
         window.player[c].mute();
         window.mute[c].value = "Unmute";
-    } else if (mute[c].value == "Unmute") {
+    } else if (window.mute[c].value == "Unmute") {
         window.player[c].unMute();
         window.mute[c].value = "Mute";
     } else {
-        if (debug) console.log("Side-by-Side Player: window.Mute broken. Defaulting.");
+        if (window.debug) console.log("Side-by-Side Player: window.Mute broken. Defaulting.");
         window.player[c].mute();
         window.mute[c].value = "Unmute";
     }
@@ -134,13 +134,13 @@ function playVideos(event) {
     for (var i = 0; i < window.player.length; i++) {
         state = window.player[i].getPlayerState();
         if (event && event.target == window.player[i] || (state == 1)) continue;
-        /*if (stopState)
-			window.player[i].seekTo(time[i].value, !0);
+        /*if (window.stopState)
+			window.player[i].seekTo(window.time[i].value, !0);
 		else
-		    window.player[i].playVideo();*/
+            window.player[i].playVideo();*/
         window.player[i].playVideo();
-        if (stopState) window.player[i].seekTo(getSec(i), !0);
-        //player[i].seekTo(player[i].getCurrentTime() + window.time[i].value, !0);
+        if (window.stopState) player[i].seekTo(getSec(i), !0);
+        //player[i].seekTo(window.player[i].getCurrentTime() + window.time[i].value, !0);
     }
     window.stopState = 0;
 }
@@ -160,29 +160,29 @@ function stopVideos(event) {
     for (var i = 0; i < window.player.length; i++) {
         state = window.player[i].getPlayerState();
         if (event && event.target == window.player[i] || (state == -1 || state === 0)) continue;
-        //if (seek) window.player[i].seekTo(time[i].value, !0);
+        //if (seek) window.player[i].seekTo(window.time[i].value, !0);
         //player[i].stopVideo();
-        window.player[i].seekTo(player[i].getDuration(), !0);
+        window.player[i].seekTo(window.player[i].getDuration(), !0);
     }
 }
 
 function setTimes() {
     for (var i = 0; i < window.player.length; i++) {
         window.startTime[i] = processTime(i);
-        window.player[i].seekTo(startTime[i], !0);
+        window.player[i].seekTo(window.startTime[i], !0);
         writePerma();
     }
 }
 
 function setVideos() {
     for (var i = 0; i < window.player.length; i++) {
-        if (debug) console.log("Side-by-Side Player: Value" + i + " - " + window.video[i].value);
-        var parts = parseVideoID(video[i].value);
-        if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
+        if (window.debug) console.log("Side-by-Side Player: Value" + i + " - " + window.video[i].value);
+        var parts = parseVideoID(window.video[i].value);
+        if (window.debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
         var tempVideo = parts.id;
-        if (debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
+        if (window.debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
         var tempTime = parts.time || processTime(i);
-        if (debug) console.log("Side-by-Side Player: Time" + i + " - " + tempTime);
+        if (window.debug) console.log("Side-by-Side Player: Time" + i + " - " + tempTime);
         //startTime[i] = processTime(i);
         if (tempVideo !== undefined) {
             window.player[i].loadVideoById(tempVideo, tempTime, "default");
@@ -205,15 +205,15 @@ function processTime(n) {
 // Implemented based on: http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url
 function parseVideoID(string) {
     //var webMatches = /.*(?:youtu\.be\/([a-zA-Z0-9_-]+)(?:\?.*)?|youtube\.com\/(?:embed\/|v\/|watch.*(?:\?|\&)v=)([a-zA-Z0-9_-]+)(?:(?:\?|\&|\#).*)?|^([a-zA-Z0-9_-]+)$)/gm;
-    if (debug) console.log("Side-by-Side Player: Matched? " + string.match(/^([a-zA-Z0-9_-]+)$/m));
+    if (window.debug) console.log("Side-by-Side Player: Matched? " + string.match(/^([a-zA-Z0-9_-]+)$/m));
     if (string.match(/^([a-zA-Z0-9_-]+)$/m)) return {
         'id': string
     };
     if (string.indexOf("%2F")) string = decodeURIComponent(string);
     var videoID, tTime;
-    if (debug) console.log("Side-by-Side Player: Ping.");
+    if (window.debug) console.log("Side-by-Side Player: Ping.");
     var parameters = paramArray(string);
-    if (debug) console.log("Side-by-Side Player: " + parameters);
+    if (window.debug) console.log("Side-by-Side Player: " + parameters);
     if (parameters.v) videoID = parameters.v;
     else {
         //var webMatches = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?.*v=)([a-zA-Z0-9_-]+).*$/;
@@ -224,8 +224,8 @@ function parseVideoID(string) {
     if (videoID) {
         if (parameters.start) tTime = Number(parameters.start);
         else if (parameters.t) tTime = hmsToS(parameters.t);
-        if (debug) console.log("Side-by-Side Player: window.Time Parameter - " + parameters.t);
-        if (debug) console.log("Side-by-Side Player: window.Video Parameter - " + videoID);
+        if (window.debug) console.log("Side-by-Side Player: window.Time Parameter - " + parameters.t);
+        if (window.debug) console.log("Side-by-Side Player: window.Video Parameter - " + videoID);
         return {
             'id': videoID,
                 'time': tTime
@@ -254,9 +254,9 @@ function isNumber(n) {
 
 function processDoubler() {
     //var parameters = window.doubler.value.split("?")[1].split("&");
-    var parameters = paramArray(doubler.value);
-    video0.value = parseVideoID(parameters.video1).id;
-    video1.value = parseVideoID(parameters.video2).id;
+    var parameters = paramArray(window.doubler.value);
+    window.video0.value = parseVideoID(parameters.video1).id;
+    window.video1.value = parseVideoID(parameters.video2).id;
     sToHMS(parameters.start1, 0);
     sToHMS(parameters.start2, 0);
     writePerma();
@@ -272,10 +272,10 @@ function getSec(i) {
 
 function hmsToS(timeStamp) {
     if (timeStamp.match(/^\d+$/m)) return timeStamp;
-    var h = m = s = 0;
-    if (h = timeStamp.match(/(\d+)[hH]/)) h = Number(h[1]) || 0;
-    if (m = timeStamp.match(/(\d+)[mM]/)) m = Number(m[1]) || 0;
-    if (s = timeStamp.match(/(\d+)[sS]/)) s = Number(s[1]) || 0;
+    var h, m, s = 0;
+    if (h == timeStamp.match(/(\d+)[hH]/)) h = Number(h[1]) || 0;
+    if (m == timeStamp.match(/(\d+)[mM]/)) m = Number(m[1]) || 0;
+    if (s == timeStamp.match(/(\d+)[sS]/)) s = Number(s[1]) || 0;
 
     return (h * 60 * 60) + (m * 60) + s;
 }
