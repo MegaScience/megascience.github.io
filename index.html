@@ -159,16 +159,21 @@
             };
 
             function onYouTubeIframeAPIReady() {
-                if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
-                /*	if (tempParam.video0) startVideo[0] = tempParam.video0;
+                if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
+                /*if (tempParam.video0) startVideo[0] = tempParam.video0;
 					if (tempParam.video1) startVideo[1] = tempParam.video1;
 					if (tempParam.start0) startTime[0] = tempParam.start0;
 					if (tempParam.start1) startTime[1] = tempParam.start1;*/
+				var video, start, volume;
                 for (var i = 0; i < startVideo.length; i++) {
+					if (debug) console.log("Side-by-Side Player: Parameters - " + tempParam.join());
                     //if (tempParam.length) {
-                        if (tempParam['video' + i].length) startVideo[i] = tempParam['video' + i];
-                        if (tempParam['start' + i].length) startTime[i] = tempParam['start' + i];
-                        if (tempParam['volume' + i].length) volume[i] = tempParam['volume' + i];
+						var videoT = "video" + i;
+						var startT = "start" + i;
+						var volumeT = "volume" + i;
+                        if (tempParam[videoT].length) startVideo[i] = tempParam[videoT];
+                        if (tempParam[startT].length) startTime[i] = tempParam[startT];
+                        if (tempParam[volumeT].length) volume[i] = tempParam[volumeT];
                     //}
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
