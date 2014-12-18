@@ -16,8 +16,18 @@
             input[name="textArea"] {
                 width: 99%;
             }
-            input[name="time"] {
-                max-width: 12%;
+            input[name="number"] {
+                max-width: 15%;
+                min-width: 8%;
+            }
+            /*#groupVolume {
+                float: left;
+                clear: both;
+				width: 70%;
+            }*/
+            input[type="button"][value="Mute"] {
+                float: right;
+                clear: both;
             }
         </style>
     </head>
@@ -61,14 +71,14 @@
                 <tr>
                     <th>Set Time:</th>
                     <td>Hours:
-                        <input type="text" min="0" name="time" id="time0h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
-                        <input type="text" min="0" name="time" id="time0m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
-                        <input type="text" min="0" name="time" id="time0s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="text" min="0" name="number" id="time0h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
+                        <input type="text" min="0" name="number" id="time0m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
+                        <input type="text" min="0" name="number" id="time0s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                     </td>
                     <td>Hours:
-                        <input type="text" min="0" name="time" id="time1h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
-                        <input type="text" min="0" name="time" id="time1m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
-                        <input type="text" min="0" name="time" id="time1s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="text" min="0" name="number" id="time1h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
+                        <input type="text" min="0" name="number" id="time1m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
+                        <input type="text" min="0" name="number" id="time1s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                     </td>
                     <td>
                         <input type="button" onclick="setTimes()" value="Set">
@@ -77,9 +87,13 @@
                 <tr>
                     <th></th>
                     <td>
+                        <input type="number" min="0" max="100" name="number" id="volumeBut0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="button" onclick="setVolume(0)" value="Set" id="volume0">
                         <input type="button" onclick="toggleMute(0)" value="Mute" id="mute0">
                     </td>
                     <td>
+                        <input type="number" min="0" max="100" name="number" id="volumeBut1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="button" onclick="setVolume(1)" value="Set" id="volume1">
                         <input type="button" onclick="toggleMute(1)" value="Mute" id="mute1">
                     </td>
                     <td></td>
@@ -109,10 +123,11 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 1;
+            var debug = 0;
             var player = [];
             var startTime = [1, 0];
             var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
+            var volume = [100, 100];
             var video = [document.getElementById("video0"), document.getElementById("video1")];
             //var time = [];
             /*for (var i = 0; i < player.length; i++) {
@@ -136,21 +151,25 @@
             var playPause = document.getElementById("playPause");
             var doubler = document.getElementById("doubler");
             var perma = document.getElementById("perma");
+            var volumeBut = [document.getElementById("volumeBut0"), document.getElementById("volumeBut1")];
             var playerEvents = {
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
 
             function onYouTubeIframeAPIReady() {
-				if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
-				if (window.location.href.length) {
-					var tempParam = paramArray(window.location.href);
-					if (tempParam.video0) startVideo[0] = tempParam.video0;
+                if (debug) console.log("Side-by-Side Player: Parameters - " + window.location.href + " (Length: " + window.location.href.length + ")");
+                var tempParam = paramArray(window.location.href);
+                /*	if (tempParam.video0) startVideo[0] = tempParam.video0;
 					if (tempParam.video1) startVideo[1] = tempParam.video1;
 					if (tempParam.start0) startTime[0] = tempParam.start0;
-					if (tempParam.start1) startTime[1] = tempParam.start1;
-				}
+					if (tempParam.start1) startTime[1] = tempParam.start1;*/
                 for (var i = 0; i < startVideo.length; i++) {
+                    if (tempParam.length) {
+                        if (tempParam['video' + i]) startVideo[i] = tempParam['video' + i];
+                        if (tempParam['start' + i]) startTime[i] = tempParam['start' + i];
+                        if (tempParam['volume' + i]) volume[i] = tempParam['volume' + i];
+                    }
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
                         width: '100%',
@@ -164,14 +183,17 @@
                         },
                         events: playerEvents
                     }));
+                    player[i].num = i;
                     //time[i].value = startTime[i];
                     sToHMS(startTime[i], i);
                     video[i].value = startVideo[i];
+                    volumeBut[i].value = volume[i];
                 }
                 writePerma();
             }
 
             function onPlayerReady(event) {
+                event.target.setVolume(volume[event.target.num]);
                 //event.target.playVideo();
             }
 
@@ -219,18 +241,25 @@
                 }
             }
 
-            function toggleMute(c) {
-                if (mute[c].value == "Mute") {
-                    player[c].mute();
-                    mute[c].value = "Unmute";
-                } else if (mute[c].value == "Unmute") {
-                    player[c].unMute();
-                    mute[c].value = "Mute";
+            function toggleMute(i) {
+                if (mute[i].value == "Mute") {
+                    player[i].mute();
+                    mute[i].value = "Unmute";
+                } else if (mute[i].value == "Unmute") {
+                    player[i].unMute();
+                    mute[i].value = "Mute";
                 } else {
                     if (debug) console.log("Side-by-Side Player: Mute broken. Defaulting.");
-                    player[c].mute();
-                    mute[c].value = "Unmute";
+                    player[i].mute();
+                    mute[i].value = "Unmute";
                 }
+            }
+
+            function setVolume(i) {
+                if (debug) console.log("Side-by-Side Player: Volume Value: " + volumeBut[i].value);
+                volume[i] = volumeBut[i].value;
+                player[i].setVolume(volume[i]);
+                writePerma();
             }
 
             function playVideos(event) {
@@ -313,7 +342,7 @@
                 if (string.match(/^([a-zA-Z0-9_-]+)$/m)) return {
                     'id': string
                 };
-				if(string.indexOf("%2F")) string = decodeURIComponent(string);
+                if (string.indexOf("%2F")) string = decodeURIComponent(string);
                 var videoID, tTime;
                 if (debug) console.log("Side-by-Side Player: Ping.");
                 var parameters = paramArray(string);
@@ -363,7 +392,7 @@
                 video1.value = parseVideoID(parameters.video2).id;
                 sToHMS(parameters.start1, 0);
                 sToHMS(parameters.start2, 0);
-				writePerma();
+                writePerma();
             }
 
             function getSec(i) {
@@ -376,10 +405,10 @@
 
             function hmsToS(timeStamp) {
                 if (timeStamp.match(/^\d+$/m)) return timeStamp;
-                var h = m = s = 0;
-                if (h = timeStamp.match(/(\d+)[hH]/)) h = Number(h[1]) || 0;
-                if (m = timeStamp.match(/(\d+)[mM]/)) m = Number(m[1]) || 0;
-                if (s = timeStamp.match(/(\d+)[sS]/)) s = Number(s[1]) || 0;
+                var h, m, s = 0;
+                if (h == timeStamp.match(/(\d+)[hH]/)) h = Number(h[1]) || 0;
+                if (m == timeStamp.match(/(\d+)[mM]/)) m = Number(m[1]) || 0;
+                if (s == timeStamp.match(/(\d+)[sS]/)) s = Number(s[1]) || 0;
 
                 return (h * 60 * 60) + (m * 60) + s;
             }
@@ -402,7 +431,8 @@
                 for (var i = 0; i < player.length; i++) {
                     if (i > 0) permaParam += "&";
                     permaParam += "video" + i + "=" + startVideo[i] +
-                        "&start" + i + "=" + startTime[i];
+                        "&start" + i + "=" + startTime[i] +
+                        "&volume" + i + "=" + volume[i];
                 }
                 perma.value = website + "?" + permaParam;
             }
