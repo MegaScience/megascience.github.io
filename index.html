@@ -144,8 +144,8 @@
 			init.push( new playerSettings("qeMFqkcPYcg", 1) );
 			init.push( new playerSettings("g1AJdg3zxlw") );
 			var settings = [];
-			settings.push( init[0] );
-			settings.push( init[1] );
+			settings.push( new playerSettings("qeMFqkcPYcg", 1) );
+			settings.push( new playerSettings("g1AJdg3zxlw") );
             var player = [];
 			var elements = { playPause: document.getElementById("playPause"), doubler: document.getElementById("doubler"), perma: document.getElementById("perma"), title: document.getElementById("title"), player: [] };
 			var playerElements = function (i) {
@@ -449,15 +449,19 @@
 
             function writePerma(first) {
                 var website = window.location.href;
-                if (website.indexOf("?") > -1) website = website.split("?")[0];
+                if (website.indexOf(/[?#]/) > -1) website = website.split(/[?#]/)[0];
+				if (debug) console.log("Side-by-Side Player: Website: " + website);
                 var permaParam = [];
+				if (debug) console.log("Side-by-Side Player: Player Length? " + player.length);
                 for (var i = 0; i < player.length; i++) {
-					if(settings[i] == init[i]) continue;
-					if(settings[i].videoID != def.videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
-                    if(settings[i].time != def.time) permaParam.push("start" + i + "=" + settings[i].time);
-                    if(settings[i].volume != def.volume) permaParam.push("volume" + i + "=" + settings[i].volume);
-                    if(settings[i].mute != def.mute) permaParam.push("mute" + i + "=" + settings[i].mute);
-                }
+					//if(settings[i] == init[i]) continue;
+					if(JSON.stringify(settings[i]) === JSON.stringify(init[i])) continue;
+					if(def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    if(def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
+                    if(def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+                    if(def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
+				}
+				if (debug) console.log("Side-by-Side Player: Perma Length? " + permaParam.length);
                 if(permaParam.length) elements.perma.value = website + "?" + permaParam.join("&");
 				else elements.perma.value = website;
 				if(!first) writeTitle();
@@ -475,9 +479,12 @@
 			}
 
 			function updateVideo() {
+				console.log("Butt.");
 				var tempParam = paramArray(window.location.hash, [ /video[0-9]+/, /start[0-9]+/, /volume[0-9]+/, /mute[0-9]+/ ]);
+				console.log(JSON.stringify(tempParam));
 				if (!isEmpty(tempParam)) {
 					for (var i = 0; i < player.length; i++) {
+						if (debug) console.log("Side-by-Side Player: Before settings: " + JSON.stringify(settings[i]));
 						if (('video' + i) in tempParam) settings[i].videoID = tempParam['video' + i];
 						if (('start' + i) in tempParam) settings[i].time = tempParam['start' + i];
 						if (('volume' + i) in tempParam) settings[i].volume = tempParam['volume' + i];
@@ -485,7 +492,7 @@
 						player[i].loadVideoById(settings[i].videoID, settings[i].time, "default");
 						player[i].setVolume(settings[i].volume);
 						if(settings[i].mute) toggleMute(i, 1);
-						//change = 0;
+						if (debug) console.log("Side-by-Side Player: After settings: " + JSON.stringify(settings[i]));
 					}
 					writePerma();
 				}
