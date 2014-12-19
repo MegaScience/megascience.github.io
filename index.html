@@ -25,7 +25,7 @@
                 clear: both;
 				width: 70%;
             }*/
-            input[type="button"][value="Mute"] {
+            input[type="button"][id^="mute"] {
                 float: right;
                 clear: both;
             }
@@ -212,7 +212,10 @@
 
             function onPlayerReady(event) {
                 event.target.setVolume(volume[event.target.num]);
-				if(mute[event.target.num]) event.target.mute();
+				if(mute[event.target.num]) {
+					event.target.mute();
+                    muteBut[i].value = "Unmute";
+				}
                 //event.target.playVideo();
             }
 
