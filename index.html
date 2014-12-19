@@ -131,7 +131,7 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 0;
+            var debug = 1;
             var done = false;
 			var playerSettings = function (videoID, time, volume, mute) {
 				this.videoID = videoID || "qeMFqkcPYcg";
@@ -450,7 +450,7 @@
 
             function writePerma(first) {
                 var website = window.location.href;
-                if (website.indexOf(/[?#]/) > -1) website = website.split(/[?#]/)[0];
+                if (website.indexOf("?") > -1 || website.indexOf("#") > -1 ) website = website.split(/[?#]/)[0];
 				if (debug) console.log("Side-by-Side Player: Website: " + website);
                 var permaParam = [];
 				if (debug) console.log("Side-by-Side Player: Player Length? " + player.length);
