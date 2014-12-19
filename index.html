@@ -135,7 +135,7 @@
             var startTime = [1, 0];
             var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
             var volume = [100, 100];
-            var mute = [false, false];
+            var mute = [0, 0];
             var video = [document.getElementById("video0"), document.getElementById("video1")];
             //var time = [];
             /*for (var i = 0; i < player.length; i++) {
@@ -212,10 +212,7 @@
 
             function onPlayerReady(event) {
                 event.target.setVolume(volume[event.target.num]);
-				if(mute[event.target.num]) {
-					event.target.mute();
-                    muteBut[i].value = "Unmute";
-				}
+				if(mute[event.target.num]) toggleMute(event.target.num, 1);
                 //event.target.playVideo();
             }
 
@@ -263,21 +260,21 @@
                 }
             }
 
-            function toggleMute(i) {
-                if (muteBut[i].value == "Mute") {
-                    player[i].mute();
-					mute[i] = true;
-                    muteBut[i].value = "Unmute";
-                } else if (muteBut[i].value == "Unmute") {
-                    player[i].unMute();
-					mute[i] = false;
-                    muteBut[i].value = "Mute";
-                } else {
-                    if (debug) console.log("Side-by-Side Player: Mute broken. Defaulting.");
-                    player[i].mute();
-					mute[i] = true;
-                    muteBut[i].value = "Unmute";
-                }
+            function toggleMute(i, force) {
+				if(force.length) mute[i] = !mute[i];
+				switch(mute[i]) {
+					case 1:
+						player[i].unMute();
+						mute[i] = 0;
+						muteBut[i].value = "Mute";
+						break;
+					case 0:
+					default:
+						player[i].mute();
+						mute[i] = 1;
+						muteBut[i].value = "Unmute";
+						break;
+				}
 				writePerma();
             }
 
