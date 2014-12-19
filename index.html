@@ -369,7 +369,7 @@
                 } else return undefined;
             }
 
-            function paramArray(url) {
+            function paramArray(url, format) {
                 var paramList;
                 if (url.indexOf("?") > -1) paramList = url.split("?")[1];
                 else if (url.indexOf("#") > -1) paramList = url.split("#")[1];
@@ -380,6 +380,16 @@
                 for (var i = 0; i < params.length; i++) {
 					if(!params[i].length) continue;
                     var paramValue = params[i].split("=");
+					if(format.constructor === Array) {
+						var found = false;
+						for(j = 0; j < format.length; j++) {
+							if(paramValue[0].match(format[j])) {
+								found = true;
+								break;
+							}
+						}
+						if(!found) continue;
+					}
                     objects[paramValue[0]] = paramValue[1];
                 }
                 return objects;
@@ -465,31 +475,16 @@
 			}
 
 			function updateVideo() {
-				var tempParam = paramArray(window.location.hash);
-				var change = 0;
+				var tempParam = paramArray(window.location.hash, [ /video[0-9]+/, /start[0-9]+/, /volume[0-9]+/, /mute[0-9]+/ ]);
 				if (!isEmpty(tempParam)) {
 					for (var i = 0; i < player.length; i++) {
-						if (('video' + i) in tempParam) {
-							settings[i].videoID = tempParam['video' + i];
-							change++;
-						}
-						if (('start' + i) in tempParam) {
-							settings[i].time = tempParam['start' + i];
-							change++;
-						}
-						if (('volume' + i) in tempParam) {
-							settings[i].volume = tempParam['volume' + i];
-							change++;
-						}
-						if (('mute' + i) in tempParam) {
-							settings[i].mute = tempParam['mute' + i];
-							change++;
-						}
-						if(change > 0) {
-							player[i].loadVideoById(settings[i].videoID, settings[i].time, "default");
-							player[i].setVolume(settings[i].volume);
-							if(settings[i].mute) toggleMute(i, 1);
-						}
+						if (('video' + i) in tempParam) settings[i].videoID = tempParam['video' + i];
+						if (('start' + i) in tempParam) settings[i].time = tempParam['start' + i];
+						if (('volume' + i) in tempParam) settings[i].volume = tempParam['volume' + i];
+						if (('mute' + i) in tempParam) settings[i].mute = tempParam['mute' + i];
+						player[i].loadVideoById(settings[i].videoID, settings[i].time, "default");
+						player[i].setVolume(settings[i].volume);
+						if(settings[i].mute) toggleMute(i, 1);
 						//change = 0;
 					}
 					writePerma();
