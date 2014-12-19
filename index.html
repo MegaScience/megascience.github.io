@@ -29,17 +29,17 @@
                 float: right;
                 clear: both;
             }
-            #lastModified {
-                position: fixed;
-                bottom: 0;
-                right: 0;
-                padding: 5px;
-            }
+			#lastModified {
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				padding: 5px;
+			}
         </style>
     </head>
     
     <body>
-        <div id="lastModified">Last Modified:</div>
+		<div id="lastModified">Last Modified: </div>
         <table cellspacing="4" cellpadding="0" border="0" class="centerElement" style="text-align: center">
             <colgroup>
                 <col style="width: 10%">
@@ -130,46 +130,41 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 0;
-            var playerSettings = function(videoID, time, volume, mute) {
-                this.videoID = videoID || "qeMFqkcPYcg";
-                this.time = time || 0;
-                this.volume = volume || 100;
-                this.mute = mute || 0;
-            };
-            var def = new playerSettings();
-            var settings = [];
-            settings.push(new playerSettings("qeMFqkcPYcg", 1));
-            settings.push(new playerSettings("g1AJdg3zxlw", 0));
+            var debug = 1;
+            var done = false;
+			var playerSettings = function (videoID, time, volume, mute) {
+				this.videoID = videoID || "qeMFqkcPYcg";
+				this.time = time || 0;
+				this.volume = volume || 100;
+				this.mute = mute || 0;
+			};
+			var def = new playerSettings();
+			var init = [];
+			init.push( new playerSettings("qeMFqkcPYcg", 1) );
+			init.push( new playerSettings("g1AJdg3zxlw") );
+			var settings = [];
+			settings.push( init[0] );
+			settings.push( init[1] );
             var player = [];
-            var elements = {
-                playPause: document.getElementById("playPause"),
-                doubler: document.getElementById("doubler"),
-                perma: document.getElementById("perma"),
-                player: []
-            };
-            var playerElements = function(i) {
-                this.videoID = document.getElementById("video" + i);
-                this.volume = document.getElementById("volume" + i);
-                this.mute = document.getElementById("mute" + i);
-                this.time = {
-                    hours: document.getElementById("timeHours" + i),
-                    minutes: document.getElementById("timeMinutes" + i),
-                    seconds: document.getElementById("timeSeconds" + i)
-                };
-            };
+			var elements = { playPause: document.getElementById("playPause"), doubler: document.getElementById("doubler"), perma: document.getElementById("perma"), player: [] };
+			var playerElements = function (i) {
+				this.videoID = document.getElementById("video" + i);
+				this.volume = document.getElementById("volume" + i);
+				this.mute = document.getElementById("mute" + i);
+				this.time = { hours: document.getElementById("timeHours" + i), minutes: document.getElementById("timeMinutes" + i), seconds: document.getElementById("timeSeconds" + i) };
+			};
             var playerEvents = {
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
-            document.getElementById("lastModified").innerHTML += document.lastModified;
+			document.getElementById("lastModified").innerHTML += document.lastModified;
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
-                var tempParam = paramArray(window.location.href);
+				var tempParam = paramArray(window.location.href);
                 for (var i = 0; i < settings.length; i++) {
-                    elements.player[i] = new playerElements(i);
-                    if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
+					elements.player[i] = new playerElements(i);
+					if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
                     if (tempParam) {
                         if (('video' + i) in tempParam) settings[i].videoID = tempParam['video' + i];
                         if (('start' + i) in tempParam) settings[i].time = tempParam['start' + i];
@@ -200,11 +195,9 @@
 
             function onPlayerReady(event) {
                 event.target.setVolume(settings[event.target.num].volume);
-                if (settings[event.target.num].mute) toggleMute(event.target.num, 1);
+				if(settings[event.target.num].mute) toggleMute(event.target.num, 1);
                 //event.target.playVideo();
             }
-
-            var done = false;
 
             function onPlayerStateChange(event) {
                 switch (event.data) {
@@ -216,10 +209,10 @@
                         break;
                     case YT.PlayerState.PLAYING:
                         //if (!done) {
-                        //setTimeout(stopVideos, 6000);		
+                            //setTimeout(stopVideos, 6000);		
                         //    done = true;
                         //} else {
-                        playVideos(event);
+                            playVideos(event);
                         //}
                         break;
                     case YT.PlayerState.PAUSED:
@@ -235,35 +228,35 @@
             }
 
             function toggleVideos() {
-                switch (elements.playPause.value) {
-                    case "Play":
-                        playVideos();
-                        elements.playPause.value = "Pause";
-                        break;
-                    case "Pause":
-                    default:
-                        pauseVideos();
-                        elements.playPause.value = "Play";
-                        break;
-                }
+				switch (elements.playPause.value) {
+					case "Play":
+						playVideos();
+						elements.playPause.value = "Pause";
+						break;
+					case "Pause":
+					default:
+						pauseVideos();
+						elements.playPause.value = "Play";
+						break;
+				}
             }
 
             function toggleMute(i, force) {
-                if (force !== undefined) settings[i].mute = (settings[i].mute == 1 ? 0 : 1);
-                switch (settings[i].mute) {
-                    case 1:
-                        player[i].unMute();
-                        settings[i].mute = 0;
-                        elements.player[i].mute.value = "Mute";
-                        break;
-                    case 0:
-                    default:
-                        player[i].mute();
-                        settings[i].mute = 1;
-                        elements.player[i].mute.value = "Unmute";
-                        break;
-                }
-                writePerma();
+				if(force !== undefined) settings[i].mute = (settings[i].mute == 1 ? 0 : 1);
+				switch(settings[i].mute) {
+					case 1:
+						player[i].unMute();
+						settings[i].mute = 0;
+						elements.player[i].mute.value = "Mute";
+						break;
+					case 0:
+					default:
+						player[i].mute();
+						settings[i].mute = 1;
+						elements.player[i].mute.value = "Unmute";
+						break;
+				}
+				writePerma();
             }
 
             function setVolume(i) {
@@ -323,10 +316,10 @@
                 for (var i = 0; i < player.length; i++) {
                     //if (debug) console.log("Side-by-Side Player: Value" + i + " - " + elements.player[i].videoID.value);
                     var parts = parseIDField(elements.player[i].videoID.value);
-                    if (parts.videoID === undefined) return;
+					if(parts.videoID === undefined) return;
                     //if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
                     //if (debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
-                    if (parts.time === undefined) parts.time = getSec(i);
+                    if(parts.time === undefined) parts.time = getSec(i);
                     //if (debug) console.log("Side-by-Side Player: Time" + i + " - " + parts.time);
                     //settings[i].time = getSec(i);
                     player[i].loadVideoById(parts.videoID, parts.time, "default");
@@ -343,11 +336,11 @@
             function parseIDField(string) {
                 //var webMatches = /.*(?:youtu\.be\/([a-zA-Z0-9_-]+)(?:\?.*)?|youtube\.com\/(?:embed\/|v\/|watch.*(?:\?|\&)v=)([a-zA-Z0-9_-]+)(?:(?:\?|\&|\#).*)?|^([a-zA-Z0-9_-]+)$)/gm;
                 if (debug) console.log("Side-by-Side Player: Matched? " + string.match(/^([a-zA-Z0-9_-]+)$/m));
-                var output = {};
+				var output = {};
                 if (string.match(/^([a-zA-Z0-9_-]+)$/m)) {
-                    outut.videoID = string;
-                    return output;
-                }
+					outut.videoID = string;
+					return output;
+				}
                 if (string.indexOf("%2F")) string = decodeURIComponent(string);
                 if (debug) console.log("Side-by-Side Player: Ping.");
                 var parameters = paramArray(string);
@@ -383,22 +376,22 @@
                 return objects;
             }
 
-            function isEmpty(obj) {
-                return Object.keys(obj).length === 0;
-            }
+			function isEmpty(obj) {
+				return Object.keys(obj).length === 0;
+			}
 
             function processDoubler() {
                 //var parameters = elements.doubler.value.split("?")[1].split("&");
                 var parameters = paramArray(elements.doubler.value);
-                if (parameters.video1) video0.value = parseIDField(parameters.video1).id;
-                if (parameters.video2) video1.value = parseIDField(parameters.video2).id;
+                if(parameters.video1) video0.value = parseIDField(parameters.video1).id;
+                if(parameters.video2) video1.value = parseIDField(parameters.video2).id;
                 sToHMS(parameters.start1, 0);
                 sToHMS(parameters.start2, 0);
                 writePerma();
             }
 
             function getSec(i) {
-                var obj = {};
+				var obj = {};
                 obj.h = Number(elements.player[i].time.hours.value) || 0;
                 obj.m = Number(elements.player[i].time.minutes.value) || 0;
                 obj.s = Number(elements.player[i].time.seconds.value) || 0;
@@ -408,11 +401,7 @@
 
             function hmsToS(timeStamp) {
                 if (timeStamp.match(/^\d+$/m)) return timeStamp;
-                var obj = {
-                    h: 0,
-                    m: 0,
-                    s: 0
-                };
+				var obj = {h: 0, m: 0, s: 0};
                 var temp;
                 temp = timeStamp.match(/(\d+)[hH]/);
                 if (temp) obj.h = Number(temp[1]) || 0;
@@ -424,9 +413,9 @@
                 return calcSec(obj);
             }
 
-            function calcSec(obj) {
-                return (obj.h * 60 * 60) + (obj.m * 60) + obj.s;
-            }
+			function calcSec(obj) {
+				return (obj.h * 60 * 60) + (obj.m * 60) + obj.s;
+			}
 
             function sToHMS(sec, i) {
                 var sec_num = parseInt(sec || 0, 10);
@@ -444,12 +433,14 @@
                 if (website.indexOf("?") > -1) website = website.split("?")[0];
                 var permaParam = [];
                 for (var i = 0; i < player.length; i++) {
-                    if (def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
-                    if (def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
-                    if (def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
-                    if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
+					if(settings[i] == init[i]) continue;
+					if(def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    if(def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
+                    if(def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+                    if(def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
                 }
-                elements.perma.value = website + "?" + permaParam.join("&");
+                if(permaParam.length) elements.perma.value = website + "?" + permaParam.join("&");
+				else elements.perma.value = website;
             }
         </script>
     </body>
