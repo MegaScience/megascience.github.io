@@ -29,17 +29,17 @@
                 float: right;
                 clear: both;
             }
-			#lastModified {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-				padding: 5px;
-			}
+            #lastModified {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                padding: 5px;
+            }
         </style>
     </head>
     
     <body>
-		<div id="lastModified">Last Modified: </div>
+        <div id="lastModified">Last Modified:</div>
         <table cellspacing="4" cellpadding="0" border="0" class="centerElement" style="text-align: center">
             <colgroup>
                 <col style="width: 10%">
@@ -78,14 +78,14 @@
                 <tr>
                     <th>Set Time:</th>
                     <td>Hours:
-                        <input type="text" min="0" name="number" id="time0h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
-                        <input type="text" min="0" name="number" id="time0m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
-                        <input type="text" min="0" name="number" id="time0s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="text" min="0" name="number" id="timeHours0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
+                        <input type="text" min="0" name="number" id="timeMinutes0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
+                        <input type="text" min="0" name="number" id="timeSeconds0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                     </td>
                     <td>Hours:
-                        <input type="text" min="0" name="number" id="time1h" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
-                        <input type="text" min="0" name="number" id="time1m" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
-                        <input type="text" min="0" name="number" id="time1s" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="text" min="0" name="number" id="timeHours1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Minutes:
+                        <input type="text" min="0" name="number" id="timeMinutes1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">Seconds:
+                        <input type="text" min="0" name="number" id="timeSeconds1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                     </td>
                     <td>
                         <input type="button" onclick="setTimes()" value="Set">
@@ -94,13 +94,13 @@
                 <tr>
                     <th></th>
                     <td>
-                        <input type="number" min="0" max="100" name="number" id="volumeBut0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
-                        <input type="button" onclick="setVolume(0)" value="Set" id="volume0">
+                        <input type="number" min="0" max="100" name="number" id="volume0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="button" onclick="setVolume(0)" value="Set">
                         <input type="button" onclick="toggleMute(0)" value="Mute" id="mute0">
                     </td>
                     <td>
-                        <input type="number" min="0" max="100" name="number" id="volumeBut1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
-                        <input type="button" onclick="setVolume(1)" value="Set" id="volume1">
+                        <input type="number" min="0" max="100" name="number" id="volume1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                        <input type="button" onclick="setVolume(1)" value="Set">
                         <input type="button" onclick="toggleMute(1)" value="Mute" id="mute1">
                     </td>
                     <td></td>
@@ -130,70 +130,58 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 1;
+            var debug = 0;
+            var playerSettings = function(videoID, time, volume, mute) {
+                this.videoID = videoID || "qeMFqkcPYcg";
+                this.time = time || 0;
+                this.volume = volume || 100;
+                this.mute = mute || 0;
+            };
+            var def = new playerSettings();
+            var settings = [];
+            settings.push(new playerSettings("qeMFqkcPYcg", 1));
+            settings.push(new playerSettings("g1AJdg3zxlw", 0));
             var player = [];
-            var startTime = [1, 0];
-            var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
-            var volume = [100, 100];
-            var mute = [0, 0];
-            var video = [document.getElementById("video0"), document.getElementById("video1")];
-            //var time = [];
-            /*for (var i = 0; i < player.length; i++) {
-				time.push({
-					'h': document.getElementById("time" + i + "h"),
-					'm': document.getElementById("time" + i + "m"),
-					's': document.getElementById("time" + i + "s")
-				});
-			}*/
-            var time = [{
-                'h': document.getElementById("time0h"),
-                    'm': document.getElementById("time0m"),
-                    's': document.getElementById("time0s")
-            }, {
-                'h': document.getElementById("time1h"),
-                    'm': document.getElementById("time1m"),
-                    's': document.getElementById("time1s")
-            }];
-            //var time = [document.getElementById("time0"), document.getElementById("time1")];
-            var playPause = document.getElementById("playPause");
-            var doubler = document.getElementById("doubler");
-            var perma = document.getElementById("perma");
-            var muteBut = [document.getElementById("mute0"), document.getElementById("mute1")];
-            var volumeBut = [document.getElementById("volumeBut0"), document.getElementById("volumeBut1")];
-			var tempParam = paramArray(window.location.href);
+            var elements = {
+                playPause: document.getElementById("playPause"),
+                doubler: document.getElementById("doubler"),
+                perma: document.getElementById("perma"),
+                player: []
+            };
+            var playerElements = function(i) {
+                this.videoID = document.getElementById("video" + i);
+                this.volume = document.getElementById("volume" + i);
+                this.mute = document.getElementById("mute" + i);
+                this.time = {
+                    hours: document.getElementById("timeHours" + i),
+                    minutes: document.getElementById("timeMinutes" + i),
+                    seconds: document.getElementById("timeSeconds" + i)
+                };
+            };
             var playerEvents = {
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
-			/*if(debug) {
-				var keys = [];
-				for(var key in tempParam) {
-					keys.push(key);
-				}
-				console.log("Side-by-Side Player: Parameters (Array) - " +  keys.join());
-			}*/
-			document.getElementById("lastModified").innerHTML += document.lastModified;
+            document.getElementById("lastModified").innerHTML += document.lastModified;
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
-                /*if (tempParam.video0) startVideo[0] = tempParam.video0;
-					if (tempParam.video1) startVideo[1] = tempParam.video1;
-					if (tempParam.start0) startTime[0] = tempParam.start0;
-					if (tempParam.start1) startTime[1] = tempParam.start1;*/
-                for (var i = 0; i < startVideo.length; i++) {
-					if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
+                var tempParam = paramArray(window.location.href);
+                for (var i = 0; i < settings.length; i++) {
+                    elements.player[i] = new playerElements(i);
+                    if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
                     if (tempParam) {
-                        if (('video' + i) in tempParam) startVideo[i] = tempParam['video' + i];
-                        if (('start' + i) in tempParam) startTime[i] = tempParam['start' + i];
-                        if (('volume' + i) in tempParam) volume[i] = tempParam['volume' + i];
-                        if (('mute' + i) in tempParam) mute[i] = tempParam['mute' + i];
+                        if (('video' + i) in tempParam) settings[i].videoID = tempParam['video' + i];
+                        if (('start' + i) in tempParam) settings[i].time = tempParam['start' + i];
+                        if (('volume' + i) in tempParam) settings[i].volume = tempParam['volume' + i];
+                        if (('mute' + i) in tempParam) settings[i].mute = tempParam['mute' + i];
                     }
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
                         width: '100%',
-                        videoId: startVideo[i],
+                        videoId: settings[i].videoID,
                         playerVars: {
-                            'start': startTime[i],
+                            'start': settings[i].time,
                                 'controls': 0,
                                 'showinfo': 0,
                                 'rel': 0,
@@ -202,17 +190,17 @@
                         events: playerEvents
                     }));
                     player[i].num = i;
-                    //time[i].value = startTime[i];
-                    sToHMS(startTime[i], i);
-                    video[i].value = startVideo[i];
-                    volumeBut[i].value = volume[i];
+                    elements.player[i].videoID.value = settings[i].videoID;
+                    elements.player[i].volume.value = settings[i].volume;
+                    //time[i].value = settings[i].time;
+                    sToHMS(settings[i].time, i);
                 }
                 writePerma();
             }
 
             function onPlayerReady(event) {
-                event.target.setVolume(volume[event.target.num]);
-				if(mute[event.target.num]) toggleMute(event.target.num, 1);
+                event.target.setVolume(settings[event.target.num].volume);
+                if (settings[event.target.num].mute) toggleMute(event.target.num, 1);
                 //event.target.playVideo();
             }
 
@@ -224,14 +212,14 @@
                         //stopVideos(event, 1);
                         stopState = 1;
                         stopVideos(event, 1);
-                        playPause.value = "Play";
+                        elements.playPause.value = "Play";
                         break;
                     case YT.PlayerState.PLAYING:
                         //if (!done) {
-                            //setTimeout(stopVideos, 6000);		
+                        //setTimeout(stopVideos, 6000);		
                         //    done = true;
                         //} else {
-                            playVideos(event);
+                        playVideos(event);
                         //}
                         break;
                     case YT.PlayerState.PAUSED:
@@ -247,41 +235,41 @@
             }
 
             function toggleVideos() {
-                if (playPause.value == "Pause") {
-                    pauseVideos();
-                    playPause.value = "Play";
-                } else if (playPause.value == "Play") {
-                    playVideos();
-                    playPause.value = "Pause";
-                } else {
-                    if (debug) console.log("Side-by-Side Player: Toggle broken. Defaulting.");
-                    pauseVideos();
-                    playPause.value = "Play";
+                switch (elements.playPause.value) {
+                    case "Play":
+                        playVideos();
+                        elements.playPause.value = "Pause";
+                        break;
+                    case "Pause":
+                    default:
+                        pauseVideos();
+                        elements.playPause.value = "Play";
+                        break;
                 }
             }
 
             function toggleMute(i, force) {
-				if(force !== undefined) mute[i] = (mute[i] == 1 ? 0 : 1);
-				switch(mute[i]) {
-					case 1:
-						player[i].unMute();
-						mute[i] = 0;
-						muteBut[i].value = "Mute";
-						break;
-					case 0:
-					default:
-						player[i].mute();
-						mute[i] = 1;
-						muteBut[i].value = "Unmute";
-						break;
-				}
-				writePerma();
+                if (force !== undefined) settings[i].mute = (settings[i].mute == 1 ? 0 : 1);
+                switch (settings[i].mute) {
+                    case 1:
+                        player[i].unMute();
+                        settings[i].mute = 0;
+                        elements.player[i].mute.value = "Mute";
+                        break;
+                    case 0:
+                    default:
+                        player[i].mute();
+                        settings[i].mute = 1;
+                        elements.player[i].mute.value = "Unmute";
+                        break;
+                }
+                writePerma();
             }
 
             function setVolume(i) {
-                if (debug) console.log("Side-by-Side Player: Volume Value: " + volumeBut[i].value);
-                volume[i] = volumeBut[i].value;
-                player[i].setVolume(volume[i]);
+                if (debug) console.log("Side-by-Side Player: Volume Value: " + elements.player[i].volume.value);
+                settings[i].volume = elements.player[i].volume.value;
+                player[i].setVolume(settings[i].volume);
                 writePerma();
             }
 
@@ -324,68 +312,59 @@
 
             function setTimes() {
                 for (var i = 0; i < player.length; i++) {
-                    startTime[i] = processTime(i);
-                    player[i].seekTo(startTime[i], !0);
+                    settings[i].time = getSec(i);
+                    player[i].seekTo(settings[i].time, !0);
+                    elements.playPause.value = "Pause";
                     writePerma();
                 }
             }
 
             function setVideos() {
                 for (var i = 0; i < player.length; i++) {
-                    if (debug) console.log("Side-by-Side Player: Value" + i + " - " + video[i].value);
-                    var parts = parseVideoID(video[i].value);
-                    if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
-                    var tempVideo = parts.id;
-                    if (debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
-                    var tempTime = parts.time || processTime(i);
-                    if (debug) console.log("Side-by-Side Player: Time" + i + " - " + tempTime);
-                    //startTime[i] = processTime(i);
-                    if (tempVideo !== undefined) {
-                        player[i].loadVideoById(tempVideo, tempTime, "default");
-                        video[i].value = startVideo[i] = tempVideo;
-                        //time[i].value = startTime[i] = tempTime;
-                        sToHMS(tempTime, i);
-                        startTime[i] = tempTime;
-                        playPause.value = "Pause";
-                        writePerma();
-                    }
+                    //if (debug) console.log("Side-by-Side Player: Value" + i + " - " + elements.player[i].videoID.value);
+                    var parts = parseIDField(elements.player[i].videoID.value);
+                    if (parts.videoID === undefined) return;
+                    //if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
+                    //if (debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
+                    if (parts.time === undefined) parts.time = getSec(i);
+                    //if (debug) console.log("Side-by-Side Player: Time" + i + " - " + parts.time);
+                    //settings[i].time = getSec(i);
+                    player[i].loadVideoById(parts.videoID, parts.time, "default");
+                    elements.player[i].videoID.value = settings[i].videoID = parts.videoID;
+                    //time[i].value = settings[i].time = parts.time;
+                    sToHMS(parts.time, i);
+                    settings[i].time = parts.time;
+                    elements.playPause.value = "Pause";
+                    writePerma();
                 }
-            }
-
-            function processTime(n) {
-                var tempTime = getSec(n);
-                if (!isNumber(tempTime)) tempTime = startTime[n];
-                return tempTime;
             }
 
             // Implemented based on: http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url
-            function parseVideoID(string) {
+            function parseIDField(string) {
                 //var webMatches = /.*(?:youtu\.be\/([a-zA-Z0-9_-]+)(?:\?.*)?|youtube\.com\/(?:embed\/|v\/|watch.*(?:\?|\&)v=)([a-zA-Z0-9_-]+)(?:(?:\?|\&|\#).*)?|^([a-zA-Z0-9_-]+)$)/gm;
                 if (debug) console.log("Side-by-Side Player: Matched? " + string.match(/^([a-zA-Z0-9_-]+)$/m));
-                if (string.match(/^([a-zA-Z0-9_-]+)$/m)) return {
-                    'id': string
-                };
+                var output = {};
+                if (string.match(/^([a-zA-Z0-9_-]+)$/m)) {
+                    outut.videoID = string;
+                    return output;
+                }
                 if (string.indexOf("%2F")) string = decodeURIComponent(string);
-                var videoID, tTime;
                 if (debug) console.log("Side-by-Side Player: Ping.");
                 var parameters = paramArray(string);
                 if (debug) console.log("Side-by-Side Player: " + parameters);
-                if (parameters.v) videoID = parameters.v;
+                if (parameters.v !== undefined) output.videoID = parameters.v;
                 else {
                     //var webMatches = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?.*v=)([a-zA-Z0-9_-]+).*$/;
                     //var webMatches = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/)([a-zA-Z0-9_-]+).*$/;
-                    var pre = string.match(/^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/)([a-zA-Z0-9_-]+).*$/m);
-                    if (pre) videoID = pre[1];
+                    var match = string.match(/^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/)([a-zA-Z0-9_-]+).*$/m);
+                    if (match && match[1] !== undefined) output.videoID = match[1];
                 }
-                if (videoID) {
-                    if (parameters.start) tTime = Number(parameters.start);
-                    else if (parameters.t) tTime = hmsToS(parameters.t);
+                if (output.videoID !== undefined) {
+                    if (parameters.start !== undefined) output.time = Number(parameters.start);
+                    else if (parameters.t !== undefined) output.time = hmsToS(parameters.t);
                     if (debug) console.log("Side-by-Side Player: Time Parameter - " + parameters.t);
-                    if (debug) console.log("Side-by-Side Player: Video Parameter - " + videoID);
-                    return {
-                        'id': videoID,
-                            'time': tTime
-                    };
+                    if (debug) console.log("Side-by-Side Player: Video Parameter - " + output.videoID);
+                    return output;
                 } else return undefined;
             }
 
@@ -404,36 +383,49 @@
                 return objects;
             }
 
-            function isNumber(n) {
-                return !isNaN(parseFloat(n)) && isFinite(n);
+            function isEmpty(obj) {
+                return Object.keys(obj).length === 0;
             }
 
             function processDoubler() {
-                //var parameters = doubler.value.split("?")[1].split("&");
-                var parameters = paramArray(doubler.value);
-                video0.value = parseVideoID(parameters.video1).id;
-                video1.value = parseVideoID(parameters.video2).id;
+                //var parameters = elements.doubler.value.split("?")[1].split("&");
+                var parameters = paramArray(elements.doubler.value);
+                if (parameters.video1) video0.value = parseIDField(parameters.video1).id;
+                if (parameters.video2) video1.value = parseIDField(parameters.video2).id;
                 sToHMS(parameters.start1, 0);
                 sToHMS(parameters.start2, 0);
                 writePerma();
             }
 
             function getSec(i) {
-                var h = Number(time[i].h.value) || 0;
-                var m = Number(time[i].m.value) || 0;
-                var s = Number(time[i].s.value) || 0;
+                var obj = {};
+                obj.h = Number(elements.player[i].time.hours.value) || 0;
+                obj.m = Number(elements.player[i].time.minutes.value) || 0;
+                obj.s = Number(elements.player[i].time.seconds.value) || 0;
 
-                return (h * 60 * 60) + (m * 60) + s;
+                return calcSec(obj);
             }
 
             function hmsToS(timeStamp) {
                 if (timeStamp.match(/^\d+$/m)) return timeStamp;
-                var h, m, s = 0;
-                if (h == timeStamp.match(/(\d+)[hH]/)) h = Number(h[1]) || 0;
-                if (m == timeStamp.match(/(\d+)[mM]/)) m = Number(m[1]) || 0;
-                if (s == timeStamp.match(/(\d+)[sS]/)) s = Number(s[1]) || 0;
+                var obj = {
+                    h: 0,
+                    m: 0,
+                    s: 0
+                };
+                var temp;
+                temp = timeStamp.match(/(\d+)[hH]/);
+                if (temp) obj.h = Number(temp[1]) || 0;
+                temp = timeStamp.match(/(\d+)[mM]/);
+                if (temp) obj.m = Number(temp[1]) || 0;
+                temp = timeStamp.match(/(\d+)[sS]/);
+                if (temp) obj.s = Number(temp[1]) || 0;
 
-                return (h * 60 * 60) + (m * 60) + s;
+                return calcSec(obj);
+            }
+
+            function calcSec(obj) {
+                return (obj.h * 60 * 60) + (obj.m * 60) + obj.s;
             }
 
             function sToHMS(sec, i) {
@@ -442,23 +434,22 @@
                 var m = Math.floor((sec_num - (h * 3600)) / 60);
                 var s = sec_num - (h * 3600) - (m * 60);
 
-                time[i].h.value = h;
-                time[i].m.value = m;
-                time[i].s.value = s;
+                elements.player[i].time.hours.value = h;
+                elements.player[i].time.minutes.value = m;
+                elements.player[i].time.seconds.value = s;
             }
 
             function writePerma() {
                 var website = window.location.href;
                 if (website.indexOf("?") > -1) website = website.split("?")[0];
-                var permaParam = "";
+                var permaParam = [];
                 for (var i = 0; i < player.length; i++) {
-                    if (i > 0) permaParam += "&";
-                    permaParam += "video" + i + "=" + startVideo[i] +
-                        "&start" + i + "=" + startTime[i] +
-                        "&volume" + i + "=" + volume[i] +
-                        "&mute" + i + "=" + mute[i];
+                    if (def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    if (def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
+                    if (def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+                    if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
                 }
-                perma.value = website + "?" + permaParam;
+                elements.perma.value = website + "?" + permaParam.join("&");
             }
         </script>
     </body>
