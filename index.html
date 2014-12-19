@@ -380,7 +380,7 @@
                 for (var i = 0; i < params.length; i++) {
 					if(!params[i].length) continue;
                     var paramValue = params[i].split("=");
-					if(format.constructor === Array) {
+					if(format !== undefined) {
 						var found = false;
 						for(j = 0; j < format.length; j++) {
 							if(paramValue[0].match(format[j])) {
