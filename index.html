@@ -29,10 +29,16 @@
                 float: right;
                 clear: both;
             }
+			#lastModified {
+				position: fixed;
+				top: 0;
+				right: 0;
+			}
         </style>
     </head>
     
     <body>
+		<div id="lastModified">Last Modified: </div>
         <table cellspacing="4" cellpadding="0" border="0" class="centerElement" style="text-align: center">
             <colgroup>
                 <col style="width: 10%">
@@ -158,13 +164,14 @@
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
-			if(debug) {
+			/*if(debug) {
 				var keys = [];
 				for(var key in tempParam) {
 					keys.push(key);
 				}
 				console.log("Side-by-Side Player: Parameters (Array) - " +  keys.join());
-			}
+			}*/
+			document.getElementById("lastModified").innerHTML += document.lastModified;
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
