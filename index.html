@@ -1,6 +1,7 @@
 <html>
     
     <head>
+        <title>Side-by-Side Player</title>
         <style>
             .playerCells > td {
                 width: 425px;
@@ -39,7 +40,7 @@
     </head>
     
     <body>
-		<div id="lastModified">Last Modified: </div>
+		<div id="lastModified">Last Modified:</div>
         <table cellspacing="4" cellpadding="0" border="0" class="centerElement" style="text-align: center">
             <colgroup>
                 <col style="width: 10%">
@@ -146,7 +147,7 @@
 			settings.push( init[0] );
 			settings.push( init[1] );
             var player = [];
-			var elements = { playPause: document.getElementById("playPause"), doubler: document.getElementById("doubler"), perma: document.getElementById("perma"), player: [] };
+			var elements = { playPause: document.getElementById("playPause"), doubler: document.getElementById("doubler"), perma: document.getElementById("perma"), title: document.getElementById("title"), player: [] };
 			var playerElements = function (i) {
 				this.videoID = document.getElementById("video" + i);
 				this.volume = document.getElementById("volume" + i);
@@ -157,7 +158,7 @@
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
-			document.getElementById("lastModified").innerHTML += document.lastModified;
+			document.getElementById("lastModified").innerHTML += " " + document.lastModified;
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
@@ -194,9 +195,12 @@
             }
 
             function onPlayerReady(event) {
+				event.target.ready = 1;
                 event.target.setVolume(settings[event.target.num].volume);
 				if(settings[event.target.num].mute) toggleMute(event.target.num, 1);
                 //event.target.playVideo();
+				writeTitle();
+				console.log();
             }
 
             function onPlayerStateChange(event) {
@@ -434,14 +438,24 @@
                 var permaParam = [];
                 for (var i = 0; i < player.length; i++) {
 					if(settings[i] == init[i]) continue;
-					if(def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
-                    if(def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
-                    if(def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
-                    if(def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
+					if(settings[i].videoID != def.videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    if(settings[i].time != def.time) permaParam.push("start" + i + "=" + settings[i].time);
+                    if(settings[i].volume != def.volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+                    if(settings[i].mute != def.mute) permaParam.push("mute" + i + "=" + settings[i].mute);
                 }
                 if(permaParam.length) elements.perma.value = website + "?" + permaParam.join("&");
 				else elements.perma.value = website;
+				writeTitle();
             }
+
+			function writeTitle() {
+				var titles = [];
+				for (var i = 0; i < player.length; i++) {
+					if(!player[i].ready) return;
+					titles.push(player[i].getVideoData().title);
+				}
+				elements.title = titles.join(" and ") + " - Side-by-Side Player";
+			}
         </script>
     </body>
 
