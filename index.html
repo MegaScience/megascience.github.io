@@ -1,7 +1,7 @@
 <html>
     
     <head>
-        <title>Side-by-Side Player</title>
+        <title id="title">Side-by-Side Player</title>
         <style>
             .playerCells > td {
                 width: 425px;
@@ -158,7 +158,9 @@
                 'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
             };
+			var titles = {};
 			document.getElementById("lastModified").innerHTML += " " + document.lastModified;
+			window.addEventListener("hashchange", updateVideo, false);
 
             function onYouTubeIframeAPIReady() {
                 if (debug) console.log("Side-by-Side Player: Website - " + window.location.href);
@@ -191,16 +193,15 @@
                     //time[i].value = settings[i].time;
                     sToHMS(settings[i].time, i);
                 }
-                writePerma();
+                writePerma(1);
             }
 
             function onPlayerReady(event) {
-				event.target.ready = 1;
                 event.target.setVolume(settings[event.target.num].volume);
 				if(settings[event.target.num].mute) toggleMute(event.target.num, 1);
                 //event.target.playVideo();
+				titles[event.target.num] = event.target.getVideoData().title;
 				writeTitle();
-				console.log();
             }
 
             function onPlayerStateChange(event) {
@@ -218,12 +219,14 @@
                         //} else {
                             playVideos(event);
                         //}
+						titles[event.target.num] = event.target.getVideoData().title;
+						writeTitle();
                         break;
                     case YT.PlayerState.PAUSED:
                         pauseVideos(event);
                         break;
                     case YT.PlayerState.BUFFERING:
-
+                        playVideos(event);
                         break;
                     case YT.PlayerState.CUED:
 
@@ -274,7 +277,7 @@
                 var state;
                 for (var i = 0; i < player.length; i++) {
                     state = player[i].getPlayerState();
-                    if (event && event.target == player[i] || (state == 1)) continue;
+                    if (event && event.target == player[i] || (state == 1 || state == 3)) continue;
                     /*if (stopState)
 						player[i].seekTo(time[i].value, !0);
 					else
@@ -324,6 +327,7 @@
                     //if (debug) console.log("Side-by-Side Player: Parts" + i + " - " + parts);
                     //if (debug) console.log("Side-by-Side Player: Video" + i + " - " + tempVideo);
                     if(parts.time === undefined) parts.time = getSec(i);
+                    if (debug) console.log("Side-by-Side Player: parts.time - " + parts.time);
                     //if (debug) console.log("Side-by-Side Player: Time" + i + " - " + parts.time);
                     //settings[i].time = getSec(i);
                     player[i].loadVideoById(parts.videoID, parts.time, "default");
@@ -371,9 +375,10 @@
                 else if (url.indexOf("#") > -1) paramList = url.split("#")[1];
                 else return false;
                 //var paramList = url.split("?")[1];
-                var params = paramList.split(/[&#]/);
+                var params = paramList.split(/[#&]/);
                 var objects = {};
                 for (var i = 0; i < params.length; i++) {
+					if(!params[i].length) continue;
                     var paramValue = params[i].split("=");
                     objects[paramValue[0]] = paramValue[1];
                 }
@@ -389,8 +394,8 @@
                 var parameters = paramArray(elements.doubler.value);
                 if(parameters.video1) video0.value = parseIDField(parameters.video1).id;
                 if(parameters.video2) video1.value = parseIDField(parameters.video2).id;
-                sToHMS(parameters.start1, 0);
-                sToHMS(parameters.start2, 0);
+                if(parameters.start1) sToHMS(parameters.start1, 0);
+                if(parameters.start2) sToHMS(parameters.start2, 0);
                 writePerma();
             }
 
@@ -432,7 +437,7 @@
                 elements.player[i].time.seconds.value = s;
             }
 
-            function writePerma() {
+            function writePerma(first) {
                 var website = window.location.href;
                 if (website.indexOf("?") > -1) website = website.split("?")[0];
                 var permaParam = [];
@@ -445,16 +450,50 @@
                 }
                 if(permaParam.length) elements.perma.value = website + "?" + permaParam.join("&");
 				else elements.perma.value = website;
-				writeTitle();
+				if(!first) writeTitle();
             }
 
 			function writeTitle() {
-				var titles = [];
-				for (var i = 0; i < player.length; i++) {
-					if(!player[i].ready) return;
-					titles.push(player[i].getVideoData().title);
+				var sortable = [];
+				for (var name in titles)
+                     sortable.push([name, titles[name]]);
+				sortable.sort(function(a, b) {return a[0] - b[0]});
+				var end = [];
+				for(var i = 0; i < sortable.length; i++)
+					end.push(sortable[i][1]);
+				elements.title.innerHTML = end.join(" and ") + " - Side-by-Side Player";
+			}
+
+			function updateVideo() {
+				var tempParam = paramArray(window.location.hash);
+				var change = 0;
+				if (!isEmpty(tempParam)) {
+					for (var i = 0; i < player.length; i++) {
+						if (('video' + i) in tempParam) {
+							settings[i].videoID = tempParam['video' + i];
+							change++;
+						}
+						if (('start' + i) in tempParam) {
+							settings[i].time = tempParam['start' + i];
+							change++;
+						}
+						if (('volume' + i) in tempParam) {
+							settings[i].volume = tempParam['volume' + i];
+							change++;
+						}
+						if (('mute' + i) in tempParam) {
+							settings[i].mute = tempParam['mute' + i];
+							change++;
+						}
+						if(change > 0) {
+							player[i].loadVideoById(settings[i].videoID, settings[i].time, "default");
+							player[i].setVolume(settings[i].volume);
+							if(settings[i].mute) toggleMute(i, 1);
+						}
+						//change = 0;
+					}
+					writePerma();
 				}
-				elements.title = titles.join(" and ") + " - Side-by-Side Player";
 			}
         </script>
     </body>
