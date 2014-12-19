@@ -31,7 +31,7 @@
             }
 			#lastModified {
 				position: fixed;
-				top: 0;
+				bottom: 0;
 				right: 0;
 				padding: 5px;
 			}
@@ -182,7 +182,7 @@
 					if (tempParam.start1) startTime[1] = tempParam.start1;*/
                 for (var i = 0; i < startVideo.length; i++) {
 					if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
-                    if (tempParam.length) {
+                    if (tempParam) {
                         if (('video' + i) in tempParam) startVideo[i] = tempParam['video' + i];
                         if (('start' + i) in tempParam) startTime[i] = tempParam['start' + i];
                         if (('volume' + i) in tempParam) volume[i] = tempParam['volume' + i];
