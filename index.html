@@ -261,7 +261,7 @@
             }
 
             function toggleMute(i, force) {
-				if(force.length) mute[i] = !mute[i];
+				if(force !== undefined) mute[i] = !mute[i];
 				switch(mute[i]) {
 					case 1:
 						player[i].unMute();
