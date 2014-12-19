@@ -33,6 +33,7 @@
 				position: fixed;
 				top: 0;
 				right: 0;
+				padding: 5px;
 			}
         </style>
     </head>
@@ -181,12 +182,12 @@
 					if (tempParam.start1) startTime[1] = tempParam.start1;*/
                 for (var i = 0; i < startVideo.length; i++) {
 					if (debug) console.log("Side-by-Side Player: Parameters (Object) - " + tempParam);
-                    //if (tempParam.length) {
+                    if (tempParam.length) {
                         if (('video' + i) in tempParam) startVideo[i] = tempParam['video' + i];
                         if (('start' + i) in tempParam) startTime[i] = tempParam['start' + i];
                         if (('volume' + i) in tempParam) volume[i] = tempParam['volume' + i];
                         if (('mute' + i) in tempParam) mute[i] = tempParam['mute' + i];
-                    //}
+                    }
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
                         width: '100%',
@@ -391,7 +392,7 @@
                 var paramList;
                 if (url.indexOf("?") > -1) paramList = url.split("?")[1];
                 else if (url.indexOf("#") > -1) paramList = url.split("#")[1];
-                else return url;
+                else return false;
                 //var paramList = url.split("?")[1];
                 var params = paramList.split(/[&#]/);
                 var objects = {};
