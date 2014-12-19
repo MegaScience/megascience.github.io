@@ -123,11 +123,12 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             var stopState = 0;
-            var debug = 0;
+            var debug = 1;
             var player = [];
             var startTime = [1, 0];
             var startVideo = ["qeMFqkcPYcg", "g1AJdg3zxlw"];
             var volume = [100, 100];
+            var mute = [false, false];
             var video = [document.getElementById("video0"), document.getElementById("video1")];
             //var time = [];
             /*for (var i = 0; i < player.length; i++) {
@@ -147,10 +148,10 @@
                     's': document.getElementById("time1s")
             }];
             //var time = [document.getElementById("time0"), document.getElementById("time1")];
-            var mute = [document.getElementById("mute0"), document.getElementById("mute1")];
             var playPause = document.getElementById("playPause");
             var doubler = document.getElementById("doubler");
             var perma = document.getElementById("perma");
+            var muteBut = [document.getElementById("mute0"), document.getElementById("mute1")];
             var volumeBut = [document.getElementById("volumeBut0"), document.getElementById("volumeBut1")];
 			var tempParam = paramArray(window.location.href);
             var playerEvents = {
@@ -177,6 +178,7 @@
                         if (('video' + i) in tempParam) startVideo[i] = tempParam['video' + i];
                         if (('start' + i) in tempParam) startTime[i] = tempParam['start' + i];
                         if (('volume' + i) in tempParam) volume[i] = tempParam['volume' + i];
+                        if (('mute' + i) in tempParam) mute[i] = tempParam['mute' + i];
                     //}
                     player.push(new YT.Player('player' + i, {
                         height: '100%',
@@ -202,6 +204,7 @@
 
             function onPlayerReady(event) {
                 event.target.setVolume(volume[event.target.num]);
+				if(mute[event.target.num]) event.target.mute();
                 //event.target.playVideo();
             }
 
@@ -216,12 +219,12 @@
                         playPause.value = "Play";
                         break;
                     case YT.PlayerState.PLAYING:
-                        if (!done) {
+                        //if (!done) {
                             //setTimeout(stopVideos, 6000);		
-                            done = true;
-                        } else {
+                        //    done = true;
+                        //} else {
                             playVideos(event);
-                        }
+                        //}
                         break;
                     case YT.PlayerState.PAUSED:
                         pauseVideos(event);
@@ -250,16 +253,19 @@
             }
 
             function toggleMute(i) {
-                if (mute[i].value == "Mute") {
+                if (muteBut[i].value == "Mute") {
                     player[i].mute();
-                    mute[i].value = "Unmute";
-                } else if (mute[i].value == "Unmute") {
+					mute[i] = true;
+                    muteBut[i].value = "Unmute";
+                } else if (muteBut[i].value == "Unmute") {
                     player[i].unMute();
-                    mute[i].value = "Mute";
+					mute[i] = false;
+                    muteBut[i].value = "Mute";
                 } else {
                     if (debug) console.log("Side-by-Side Player: Mute broken. Defaulting.");
                     player[i].mute();
-                    mute[i].value = "Unmute";
+					mute[i] = true;
+                    muteBut[i].value = "Unmute";
                 }
             }
 
@@ -440,7 +446,8 @@
                     if (i > 0) permaParam += "&";
                     permaParam += "video" + i + "=" + startVideo[i] +
                         "&start" + i + "=" + startTime[i] +
-                        "&volume" + i + "=" + volume[i];
+                        "&volume" + i + "=" + volume[i] +
+                        "&mute" + i + "=" + mute[i];
                 }
                 perma.value = website + "?" + permaParam;
             }
