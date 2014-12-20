@@ -278,7 +278,7 @@
                         //elements.playPause.value = "Play";
                         elements.playPause.text.innerHTML = "Play";
 						elements.playPause.icon.classList.remove("fa-youtube-play");
-						elements.playPause.icon.classList.add("fa pause");
+						elements.playPause.icon.classList.add("fa-pause");
                         break;
                     case YT.PlayerState.PLAYING:
                         //if (!done) {
@@ -314,13 +314,13 @@
                         //elements.playPause.value = "Pause";
                         elements.playPause.text.innerHTML = "Pause";
 						elements.playPause.icon.classList.remove("fa-youtube-play");
-						elements.playPause.icon.classList.add("fa pause");
+						elements.playPause.icon.classList.add("fa-pause");
                         break;
                     case "Pause":
                     default:
                         pauseVideos();
                         //elements.playPause.value = "Play";
-						elements.playPause.icon.classList.remove("fa pause");
+						elements.playPause.icon.classList.remove("fa-pause");
 						elements.playPause.icon.classList.add("fa-youtube-play");
                         elements.playPause.text.innerHTML = "Play";
                         break;
@@ -396,7 +396,7 @@
                     //elements.playPause.value = "Pause";
                     elements.playPause.text.innerHTML = "Pause";
 					elements.playPause.icon.classList.remove("fa-youtube-play");
-					elements.playPause.icon.classList.add("fa pause");
+					elements.playPause.icon.classList.add("fa-pause");
                     writePerma();
                 }
             }
@@ -421,7 +421,7 @@
                     //elements.playPause.value = "Pause";
                     elements.playPause.text.innerHTML = "Pause";
 					elements.playPause.icon.classList.remove("fa-youtube-play");
-					elements.playPause.icon.classList.add("fa pause");
+					elements.playPause.icon.classList.add("fa-pause");
                     writePerma();
                 }
             }
