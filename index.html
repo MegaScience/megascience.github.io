@@ -8,21 +8,13 @@
                 font-size: 13px;
                 //background-color: #363736;
                 background: #363736;
-                /* Old browsers */
-                background: -moz-linear-gradient(-45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #000000), color-stop(25%, #7d7e7d), color-stop(50%, #7d7e7d), color-stop(75%, #7d7e7d), color-stop(100%, #0e0e0e));
-                /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(-45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(-45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* Opera 11.10+ */
-                background: -ms-linear-gradient(-45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* IE10+ */
-                background: linear-gradient(135deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#0e0e0e', GradientType=1);
-                /* IE6-9 fallback on horizontal gradient */
+				background: -moz-linear-gradient(top,  #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(30%,#7d7e7d), color-stop(50%,#7d7e7d), color-stop(70%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
             }
             table {
                 font-size: 13px;
@@ -33,22 +25,7 @@
                 margin: 0 auto;
                 padding: 0;
                 width: 80%;
-                background: white;
-                /* Old browsers */
-                background: -moz-linear-gradient(45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* FF3.6+ */
-                background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #000000), color-stop(25%, #7d7e7d), color-stop(50%, #7d7e7d), color-stop(75%, #7d7e7d), color-stop(100%, #0e0e0e));
-                /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* Opera 11.10+ */
-                background: -ms-linear-gradient(45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* IE10+ */
-                background: linear-gradient(45deg, #000000 0%, #7d7e7d 25%, #7d7e7d 50%, #7d7e7d 75%, #0e0e0e 100%);
-                /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#0e0e0e', GradientType=1);
-                /* IE6-9 fallback on horizontal gradient */
+                background-color: white;
             }
             /*.playerCells > td {
                 width: 425px;
@@ -132,7 +109,8 @@
                     </tr>
                     <tr>
                         <th style="width: 10%">
-                            <input type="button" width="100%" onclick="toggleVideos()" value="Play" id="playPause" class="fa-youtube-play">
+                            <!--<input type="button" width="100%" onclick="toggleVideos()" value="Play" id="playPause" class="fa-youtube-play">-->
+                            <button onclick="toggleVideos()"><i id="playPauseIcon" class="fa fa-youtube-play"></i> <span id="playPause">Play</span></button>
                         </th>
                         <th style="width: 40%; font-size: 15px; text-decoration: underline;">Video 1</th>
                         <th style="width: 40%; font-size: 15px; text-decoration: underline;">Video 2</th>
@@ -169,14 +147,14 @@
                     <tr>
                         <th>Set Volume:</th>
                         <td>
-                            <input type="number" min="0" max="100" name="number" id="volume0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                            <i class="fa fa-volume-up"></i><input type="number" min="0" max="100" name="number" id="volume0" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                             <input type="button" onclick="setVolume(0)" value="Set">
-                            <input type="button" onclick="toggleMute(0)" value="Mute" id="mute0">
+                            <button onclick="toggleMute(0)"><i class="fa fa-volume-off"></i> <span id="mute0">Mute</span></button>
                         </td>
                         <td>
-                            <input type="number" min="0" max="100" name="number" id="volume1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
+                            <i class="fa fa-volume-up"></i><input type="number" min="0" max="100" name="number" id="volume1" onkeydown="return (event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey == false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode == 8) || (event.keyCode == 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode == 46))">
                             <input type="button" onclick="setVolume(1)" value="Set">
-                            <input type="button" onclick="toggleMute(1)" value="Mute" id="mute1">
+                            <button onclick="toggleMute(1)"><i class="fa fa-volume-off"></i> <span id="mute1">Mute</span></button>
                         </td>
                         <td></td>
                     </tr>
@@ -223,7 +201,7 @@
             settings.push(new playerSettings("g1AJdg3zxlw"));
             var player = [];
             var elements = {
-                playPause: document.getElementById("playPause"),
+                playPause: { text: document.getElementById("playPause"), icon: document.getElementById("playPauseIcon") },
                 doubler: document.getElementById("doubler"),
                 perma: document.getElementById("perma"),
                 title: document.getElementById("title"),
@@ -297,7 +275,10 @@
                         //stopVideos(event, 1);
                         stopState = 1;
                         stopVideos(event, 1);
-                        elements.playPause.value = "Play";
+                        //elements.playPause.value = "Play";
+                        elements.playPause.text.innerHTML = "Play";
+						elements.playPause.icon.classList.remove("fa-youtube-play");
+						elements.playPause.icon.classList.add("fa pause");
                         break;
                     case YT.PlayerState.PLAYING:
                         //if (!done) {
@@ -326,15 +307,22 @@
             }
 
             function toggleVideos() {
-                switch (elements.playPause.value) {
+                //switch (elements.playPause.value) {
+                switch (elements.playPause.text.innerHTML) {
                     case "Play":
                         playVideos();
-                        elements.playPause.value = "Pause";
+                        //elements.playPause.value = "Pause";
+                        elements.playPause.text.innerHTML = "Pause";
+						elements.playPause.icon.classList.remove("fa-youtube-play");
+						elements.playPause.icon.classList.add("fa pause");
                         break;
                     case "Pause":
                     default:
                         pauseVideos();
-                        elements.playPause.value = "Play";
+                        //elements.playPause.value = "Play";
+						elements.playPause.icon.classList.remove("fa pause");
+						elements.playPause.icon.classList.add("fa-youtube-play");
+                        elements.playPause.text.innerHTML = "Play";
                         break;
                 }
             }
@@ -345,13 +333,13 @@
                     case 1:
                         player[i].unMute();
                         settings[i].mute = 0;
-                        elements.player[i].mute.value = "Mute";
+                        elements.player[i].mute.innerHTML = "Mute";
                         break;
                     case 0:
                     default:
                         player[i].mute();
                         settings[i].mute = 1;
-                        elements.player[i].mute.value = "Unmute";
+                        elements.player[i].mute.innerHTML = "Unmute";
                         break;
                 }
                 writePerma();
@@ -405,7 +393,10 @@
                 for (var i = 0; i < player.length; i++) {
                     settings[i].time = getSec(i);
                     player[i].seekTo(settings[i].time, !0);
-                    elements.playPause.value = "Pause";
+                    //elements.playPause.value = "Pause";
+                    elements.playPause.text.innerHTML = "Pause";
+					elements.playPause.icon.classList.remove("fa-youtube-play");
+					elements.playPause.icon.classList.add("fa pause");
                     writePerma();
                 }
             }
@@ -427,7 +418,10 @@
                     //time[i].value = settings[i].time = parts.time;
                     sToHMS(parts.time, i);
                     settings[i].time = parts.time;
-                    elements.playPause.value = "Pause";
+                    //elements.playPause.value = "Pause";
+                    elements.playPause.text.innerHTML = "Pause";
+					elements.playPause.icon.classList.remove("fa-youtube-play");
+					elements.playPause.icon.classList.add("fa pause");
                     writePerma();
                 }
             }
