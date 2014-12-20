@@ -8,13 +8,13 @@
                 font-size: 13px;
                 //background-color: #363736;
                 background: #363736;
-				background: -moz-linear-gradient(top,  #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(30%,#7d7e7d), color-stop(50%,#7d7e7d), color-stop(70%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+                background: -moz-linear-gradient(top,  #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(30%,#7d7e7d), color-stop(50%,#7d7e7d), color-stop(70%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #000000 0%,#7d7e7d 30%,#7d7e7d 50%,#7d7e7d 70%,#0e0e0e 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
             }
             table {
                 font-size: 13px;
@@ -67,7 +67,7 @@
             /*#groupVolume {
                 float: left;
                 clear: both;
-				width: 70%;
+                width: 70%;
             }*/
             input[type="button"][id^="mute"] {
                 float: right;
@@ -192,7 +192,7 @@
                 this.volume = volume || 100;
                 this.mute = mute || 0;
             };
-            var def = new playerSettings();
+            //var def = new playerSettings();
             var init = [];
             init.push(new playerSettings("qeMFqkcPYcg", 1));
             init.push(new playerSettings("g1AJdg3zxlw"));
@@ -277,12 +277,12 @@
                         stopVideos(event, 1);
                         //elements.playPause.value = "Play";
                         elements.playPause.text.innerHTML = "Play";
-						elements.playPause.icon.classList.remove("fa-youtube-play");
-						elements.playPause.icon.classList.add("fa-pause");
+                        elements.playPause.icon.classList.remove("fa-youtube-play");
+                        elements.playPause.icon.classList.add("fa-pause");
                         break;
                     case YT.PlayerState.PLAYING:
                         //if (!done) {
-                        //setTimeout(stopVideos, 6000);		
+                        //setTimeout(stopVideos, 6000);        
                         //    done = true;
                         //} else {
                         playVideos(event);
@@ -313,15 +313,15 @@
                         playVideos();
                         //elements.playPause.value = "Pause";
                         elements.playPause.text.innerHTML = "Pause";
-						elements.playPause.icon.classList.remove("fa-youtube-play");
-						elements.playPause.icon.classList.add("fa-pause");
+                        elements.playPause.icon.classList.remove("fa-youtube-play");
+                        elements.playPause.icon.classList.add("fa-pause");
                         break;
                     case "Pause":
                     default:
                         pauseVideos();
                         //elements.playPause.value = "Play";
-						elements.playPause.icon.classList.remove("fa-pause");
-						elements.playPause.icon.classList.add("fa-youtube-play");
+                        elements.playPause.icon.classList.remove("fa-pause");
+                        elements.playPause.icon.classList.add("fa-youtube-play");
                         elements.playPause.text.innerHTML = "Play";
                         break;
                 }
@@ -333,16 +333,16 @@
                     case 1:
                         player[i].unMute();
                         settings[i].mute = 0;
-						elements.player[i].mute.icon.classList.remove("fa-volume-down");
-						elements.player[i].mute.icon.classList.add("fa-volume-off");
+                        elements.player[i].mute.icon.classList.remove("fa-volume-down");
+                        elements.player[i].mute.icon.classList.add("fa-volume-off");
                         elements.player[i].mute.text.innerHTML = "Mute";
                         break;
                     case 0:
                     default:
                         player[i].mute();
                         settings[i].mute = 1;
-						elements.player[i].mute.icon.classList.remove("fa-volume-off");
-						elements.player[i].mute.icon.classList.add("fa-volume-down");
+                        elements.player[i].mute.icon.classList.remove("fa-volume-off");
+                        elements.player[i].mute.icon.classList.add("fa-volume-down");
                         elements.player[i].mute.text.innerHTML = "Unmute";
                         break;
                 }
@@ -362,9 +362,9 @@
                     state = player[i].getPlayerState();
                     if (event && event.target == player[i] || (state == 1 || state == 3)) continue;
                     /*if (stopState)
-						player[i].seekTo(time[i].value, !0);
-					else
-						player[i].playVideo();*/
+                        player[i].seekTo(time[i].value, !0);
+                    else
+                        player[i].playVideo();*/
                     player[i].playVideo();
                     if (stopState) player[i].seekTo(getSec(i), !0);
                     //player[i].seekTo(player[i].getCurrentTime() + time[i].value, !0);
@@ -399,8 +399,8 @@
                     player[i].seekTo(settings[i].time, !0);
                     //elements.playPause.value = "Pause";
                     elements.playPause.text.innerHTML = "Pause";
-					elements.playPause.icon.classList.remove("fa-youtube-play");
-					elements.playPause.icon.classList.add("fa-pause");
+                    elements.playPause.icon.classList.remove("fa-youtube-play");
+                    elements.playPause.icon.classList.add("fa-pause");
                     writePerma();
                 }
             }
@@ -424,8 +424,8 @@
                     settings[i].time = parts.time;
                     //elements.playPause.value = "Pause";
                     elements.playPause.text.innerHTML = "Pause";
-					elements.playPause.icon.classList.remove("fa-youtube-play");
-					elements.playPause.icon.classList.add("fa-pause");
+                    elements.playPause.icon.classList.remove("fa-youtube-play");
+                    elements.playPause.icon.classList.add("fa-pause");
                     writePerma();
                 }
             }
@@ -549,11 +549,15 @@
                 if (debug) console.log("Side-by-Side Player: Player Length? " + player.length);
                 for (var i = 0; i < player.length; i++) {
                     //if(settings[i] == init[i]) continue;
-                    if (JSON.stringify(settings[i]) === JSON.stringify(init[i])) continue;
-                    if (def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    //if (JSON.stringify(settings[i]) === JSON.stringify(init[i])) continue;
+                    /*if (def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
                     if (def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
                     if (def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
-                    if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
+                    if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);*/
+                    if (init[i].videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
+                    if (init[i].time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
+                    if (init[i].volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+                    if (init[i].mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);
                 }
                 if (debug) console.log("Side-by-Side Player: Perma Length? " + permaParam.length);
                 if (permaParam.length) elements.perma.value = website + "?" + permaParam.join("&");
