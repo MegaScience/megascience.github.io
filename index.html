@@ -3,10 +3,27 @@
     <head>
         <title id="title">Side-by-Side Player</title>
         <style>
-            .playerCells > td {
+            /*.playerCells > td {
                 width: 425px;
                 height: 358px;
             }
+            .playerCells > td {
+                width: 425px;
+                height: auto;
+            }*/
+			.playerCells td {
+				position: relative;
+				padding-bottom: 25%; //56.25%; /* 16:9 */
+				padding-top: 25px;
+				height: 0;
+			}
+			.playerCells iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
             td {
                 padding-bottom: 0px;
             }
@@ -18,8 +35,8 @@
                 width: 99%;
             }
             input[name="number"] {
-                max-width: 15%;
                 min-width: 8%;
+                max-width: 15%;
             }
             /*#groupVolume {
                 float: left;
@@ -35,6 +52,9 @@
 				bottom: 0;
 				right: 0;
 				padding: 5px;
+			}
+			.brokenVideo {
+				outline: red solid 5px;
 			}
         </style>
     </head>
@@ -156,7 +176,8 @@
 			};
             var playerEvents = {
                 'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onStateChange': onPlayerStateChange,
+					'onError': onPlayerError
             };
 			var titles = {};
 			document.getElementById("lastModified").innerHTML += " " + document.lastModified;
@@ -234,6 +255,10 @@
                         break;
                 }
             }
+			
+			function onPlayerError(event) {
+				event.target.getIframe().classList.add("brokenVideo");
+			}
 
             function toggleVideos() {
 				switch (elements.playPause.value) {
@@ -331,6 +356,7 @@
                     if (debug) console.log("Side-by-Side Player: parts.time - " + parts.time);
                     //if (debug) console.log("Side-by-Side Player: Time" + i + " - " + parts.time);
                     //settings[i].time = getSec(i);
+					player[i].getIframe().classList.remove("brokenVideo");
                     player[i].loadVideoById(parts.videoID, parts.time, "default");
                     elements.player[i].videoID.value = settings[i].videoID = parts.videoID;
                     //time[i].value = settings[i].time = parts.time;
@@ -490,6 +516,7 @@
 						if (('start' + i) in tempParam) settings[i].time = tempParam['start' + i];
 						if (('volume' + i) in tempParam) settings[i].volume = tempParam['volume' + i];
 						if (('mute' + i) in tempParam) settings[i].mute = tempParam['mute' + i];
+						player[i].getIframe().classList.remove("brokenVideo");
 						player[i].loadVideoById(settings[i].videoID, settings[i].time, "default");
 						player[i].setVolume(settings[i].volume);
 						if(settings[i].mute) toggleMute(i, 1);
