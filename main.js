@@ -7,7 +7,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var stopState = 0;
 var debug = 1;
 var done = false;
-var playerSettings = function (videoID, time, volume, mute) {
+var playerSettings = function(videoID, time, volume, mute) {
     this.videoID = videoID || "qeMFqkcPYcg";
     this.time = time || 0;
     this.volume = volume || 100;
@@ -31,7 +31,7 @@ var elements = {
     title: document.getElementById("title"),
     player: []
 };
-var playerElements = function (i) {
+var playerElements = function(i) {
     this.videoID = document.getElementById("video" + i);
     this.volume = document.getElementById("volume" + i);
     this.mute = {
@@ -46,8 +46,8 @@ var playerElements = function (i) {
 };
 var playerEvents = {
     'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange,
-        'onError': onPlayerError
+    'onStateChange': onPlayerStateChange,
+    'onError': onPlayerError
 };
 var titles = {};
 document.getElementById("lastModified").innerHTML += " " + document.lastModified;
@@ -72,11 +72,11 @@ function onYouTubeIframeAPIReady() {
             videoId: settings[i].videoID,
             playerVars: {
                 'start': settings[i].time,
-                    'controls': 0,
-                    'showinfo': 0,
-                    'rel': 0,
-                    'modestbranding': 1,
-                    'theme': "light"
+                'controls': 0,
+                'showinfo': 0,
+                'rel': 0,
+                'modestbranding': 1,
+                'theme': "light"
             },
             events: playerEvents
         }));
@@ -193,9 +193,9 @@ function playVideos(event) {
         state = player[i].getPlayerState();
         if (event && event.target == player[i] || (state == 1 || state == 3)) continue;
         /*if (stopState)
-                        player[i].seekTo(time[i].value, !0);
-                    else
-                        player[i].playVideo();*/
+            player[i].seekTo(time[i].value, !0);
+        else
+            player[i].playVideo();*/
         player[i].playVideo();
         if (stopState) player[i].seekTo(getSec(i), !0);
         //player[i].seekTo(player[i].getCurrentTime() + time[i].value, !0);
@@ -336,7 +336,7 @@ function processDoubler() {
 function getSec(i) {
     var obj = {};
     for (var prop in elements.player[i].time)
-    obj[prop] = Number(elements.player[i].time[prop].value) || 0;
+        obj[prop] = Number(elements.player[i].time[prop].value) || 0;
 
     return calcSec(obj);
 }
@@ -370,7 +370,7 @@ function sToHMS(sec, i) {
     obj.s = sec_num - (obj.h * 3600) - (obj.m * 60);
 
     for (var prop in elements.player[i].time)
-    elements.player[i].time[prop].value = obj[prop];
+        elements.player[i].time[prop].value = obj[prop];
 }
 
 function writePerma(first) {
@@ -383,9 +383,9 @@ function writePerma(first) {
         //if(settings[i] == init[i]) continue;
         //if (JSON.stringify(settings[i]) === JSON.stringify(init[i])) continue;
         /*if (def.videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
-                    if (def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
-                    if (def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
-                    if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);*/
+        if (def.time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
+        if (def.volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
+        if (def.mute != settings[i].mute) permaParam.push("mute" + i + "=" + settings[i].mute);*/
         if (init[i].videoID != settings[i].videoID) permaParam.push("video" + i + "=" + settings[i].videoID);
         if (init[i].time != settings[i].time) permaParam.push("start" + i + "=" + settings[i].time);
         if (init[i].volume != settings[i].volume) permaParam.push("volume" + i + "=" + settings[i].volume);
@@ -400,13 +400,13 @@ function writePerma(first) {
 function writeTitle() {
     var sortable = [];
     for (var name in titles)
-    if (titles[name].length) sortable.push([name, titles[name]]);
-    sortable.sort(function (a, b) {
+        if (titles[name].length) sortable.push([name, titles[name]]);
+    sortable.sort(function(a, b) {
         return a[0] - b[0]
     });
     var end = [];
     for (var i = 0; i < sortable.length; i++)
-    end.push(sortable[i][1]);
+        end.push(sortable[i][1]);
     elements.title.innerHTML = end.join(" and ") + " - Side-by-Side Player";
 }
 
