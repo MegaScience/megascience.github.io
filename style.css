@@ -4,19 +4,12 @@ body {
     //background-color: #363736;
     background: #363736;
     background: -moz-linear-gradient(top, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
-    /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(30%, #7d7e7d), color-stop(50%, #7d7e7d), color-stop(70%, #7d7e7d), color-stop(100%, #0e0e0e));
-    /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
-    /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
-    /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
-    /* IE10+ */
     background: linear-gradient(to bottom, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
-    /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#0e0e0e', GradientType=0);
-    /* IE6-9 */
 }
 table {
     font-size: 13px;
@@ -29,19 +22,17 @@ table {
     width: 80%;
     background-color: white;
 }
-/*.playerCells > td {
-                width: 425px;
-                height: 358px;
-            }
-            .playerCells > td {
-                width: 425px;
-                height: auto;
-            }*/
- .playerCells td {
+.playerCells > td {
+    width: 425px;
+    height: 358px;
+}
+.playerCells > td {
+    width: 425px;
+    height: auto;
+}
+.playerCells td {
     position: relative;
-    padding-bottom: 25%;
-    //56.25%;
-    /* 16:9 */
+    padding-bottom: 25%; //56.25%; /* 16:9 */
     padding-top: 25px;
     height: 0;
 }
@@ -67,11 +58,11 @@ input[name="number"] {
     max-width: 15%;
 }
 /*#groupVolume {
-                float: left;
-                clear: both;
-                width: 70%;
-            }*/
- input[type="button"][id^="mute"] {
+    float: left;
+    clear: both;
+    width: 70%;
+}*/
+input[type="button"][id^="mute"] {
     float: right;
     clear: both;
 }
