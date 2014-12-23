@@ -143,9 +143,9 @@ function toggleVideos() {
         case "Play":
             playVideos();
             //elements.playPause.value = "Pause";
-            elements.playPause.text.innerHTML = "Pause";
             elements.playPause.icon.classList.remove("fa-youtube-play");
             elements.playPause.icon.classList.add("fa-pause");
+            elements.playPause.text.innerHTML = "Pause";
             break;
         case "Pause":
         default:
@@ -330,7 +330,7 @@ function processDoubler() {
     if (parameters.video2) video1.value = parseIDField(parameters.video2).videoID;
     if (parameters.start1) sToHMS(parameters.start1, 0);
     if (parameters.start2) sToHMS(parameters.start2, 1);
-    writePerma();
+    //writePerma();
 }
 
 function getSec(i) {
