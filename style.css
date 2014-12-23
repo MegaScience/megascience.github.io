@@ -1,7 +1,7 @@
 body {
     font-family: verdana, ​arial, ​helvetica, ​ sans-serif;
     font-size: 13px;
-    //background-color: #363736;
+    /*background-color: #363736;*/
     background: #363736;
     background: -moz-linear-gradient(top, #000000 0%, #7d7e7d 30%, #7d7e7d 50%, #7d7e7d 70%, #0e0e0e 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(30%, #7d7e7d), color-stop(50%, #7d7e7d), color-stop(70%, #7d7e7d), color-stop(100%, #0e0e0e));
@@ -15,7 +15,6 @@ table {
     font-size: 13px;
 }
 #container {
-    //background-color: white;
     height: 100%;
     margin: 0 auto;
     padding: 0;
@@ -23,13 +22,13 @@ table {
     background-color: white;
 }
 .playerCells > td {
-    width: 425px;
-    height: 358px;
+    max-width: 425px;
+    max-height: 358px;
 }
-.playerCells > td {
+/*.playerCells > td {
     width: 425px;
     height: auto;
-}
+}*/
 .playerCells td {
     position: relative;
     padding-bottom: 25%; //56.25%; /* 16:9 */
