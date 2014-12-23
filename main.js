@@ -51,7 +51,8 @@ var playerEvents = {
 };
 var titles = {};
 document.getElementById("lastModified").innerHTML += " " + document.lastModified;
-window.addEventListener("hashchange", updateVideo, false);
+window.addEventListener("hashchange", updateVideos, false);
+window.addEventListener("unload", destroyVideos, false});
 
 function onYouTubeIframeAPIReady() {
     if (debug) debugInfo("Website - " + window.location.href);
@@ -410,7 +411,7 @@ function writeTitle() {
     elements.title.innerHTML = end.join(" and ") + " - Side-by-Side Player";
 }
 
-function updateVideo() {
+function updateVideos() {
     var tempParam = paramArray(window.location.hash, [/video[0-9]+/, /start[0-9]+/, /volume[0-9]+/, /mute[0-9]+/]);
     if (!isEmpty(tempParam)) {
         for (var i = 0; i < player.length; i++) {
@@ -430,6 +431,11 @@ function updateVideo() {
         }
         writePerma();
     }
+}
+
+function destroyVideos() {
+    for(var i = 0; i < player.length; i++)
+        player[i].destroy();
 }
 
 function debugInfo(text) {
