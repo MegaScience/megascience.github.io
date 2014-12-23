@@ -52,7 +52,7 @@ var playerEvents = {
 var titles = {};
 document.getElementById("lastModified").innerHTML += " " + document.lastModified;
 window.addEventListener("hashchange", updateVideos, false);
-window.addEventListener("unload", destroyVideos, false});
+window.addEventListener("unload", destroyVideos, false);
 
 function onYouTubeIframeAPIReady() {
     if (debug) debugInfo("Website - " + window.location.href);
