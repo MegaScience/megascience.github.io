@@ -5,7 +5,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var stopState = 0;
-var debug = 1;
+var debug = 0;
 var done = false;
 var playerSettings = function(videoID, time, volume, mute) {
     this.videoID = videoID || "qeMFqkcPYcg";
@@ -50,7 +50,6 @@ var playerEvents = {
     'onError': onPlayerError
 };
 var titles = {};
-document.getElementById("lastModified").innerHTML += " " + document.lastModified;
 window.addEventListener("hashchange", updateVideos, false);
 window.addEventListener("unload", destroyVideos, false);
 
