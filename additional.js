@@ -10,11 +10,11 @@ function addImage() {
     curURL = "http://api.skype.com/users/" + name.trim() + "/profile/avatar";
     newURL.href = curURL;
     newImage.src = curURL;
-    newImage.height = "96px";
-    newImage.width = "96px";
+    newImage.height = "96";
+    newImage.width = "96";
     newURL.appendChild(newImage);
+    newURL.innerHTML += "<br>" + name;
     newDIV.appendChild(newURL);
-    newDIV.innerHTML += "<br>" + name;
     divList = imageArea.getElementsByTagName("div");
     if(divList.length > 53) divList[divList.length - 1].remove();
     imageArea.appendChild(newDIV);
