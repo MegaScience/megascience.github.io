@@ -10,6 +10,7 @@ function addImage() {
     newImage = document.createElement("img");
     curURL = "http://api.skype.com/users/" + name.trim() + "/profile/avatar";
     newURL.href = curURL;
+    newURL.target = "_blank";
     newImage.src = curURL;
     newImage.height = "96";
     newImage.width = "96";
