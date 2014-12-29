@@ -81,4 +81,6 @@ input[type="button"][id^="mute"] {
 }
 #imageArea div {
     float: left;
+    border: lightblue 1px solid;
+    margin: 1px;
 }
