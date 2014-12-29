@@ -76,6 +76,9 @@ input[type="button"][id^="mute"] {
 .brokenVideo {
     outline: red solid 5px;
 }
+#imageArea {
+    width: 85%;
+}
 #imageArea div {
     float: left;
 }
