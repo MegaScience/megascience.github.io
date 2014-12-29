@@ -10,6 +10,6 @@ function addImage() {
     newElement.appendChild(newImage);
     newElement.innerHTML += "<br>" + name;
     imageAreaDivs = imageArea.getElementsByTagName("div");
-    if(imageAreaDivs.length > 24) imageAreaDivs.last().remove();
+    if(imageAreaDivs.length > 24) imageAreaDivs[imageAreaDivs.length - 1].remove();
     imageArea.appendChild(newElement);
 }
