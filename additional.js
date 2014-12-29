@@ -1,9 +1,10 @@
 var imageArea = document.getElementById("imageArea");
-var newDIV, newImage, newURL, curURL, divList;
+var newDIV, oldDIV, newImage, newURL, curURL, divList;
 
 function addImage() {
     var name = document.getElementById("textArea").value;
     if(name === null || name.trim() === "") return;
+    oldDIV = newDIV;
     newDIV = document.createElement("div");
     newURL = document.createElement("a");
     newImage = document.createElement("img");
@@ -17,5 +18,6 @@ function addImage() {
     newDIV.appendChild(newURL);
     divList = imageArea.getElementsByTagName("div");
     if(divList.length > 53) divList[divList.length - 1].remove();
-    imageArea.appendChild(newDIV);
+    //imageArea.appendChild(newDIV);
+    imageArea.insertBefore(newDIV, oldDIV);
 }
