@@ -18,7 +18,7 @@ function addImage() {
     newURL.innerHTML += "<br>" + name;
     newDIV.appendChild(newURL);
     divList = imageArea.getElementsByTagName("div");
-    if(divList.length > 53) divList[divList.length - 1].remove();
+    if(divList.length > 83) divList[divList.length - 1].remove();
     //imageArea.appendChild(newDIV);
     imageArea.insertBefore(newDIV, oldDIV);
 }
