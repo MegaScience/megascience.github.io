@@ -342,12 +342,16 @@ function getSec(i) {
 }
 
 function hmsToS(timeStamp) {
+    // Whenever I try to look up ways of checking if a variable is a number,
+    // I get a list of different commands, followed by "Won't work in these cases."
+    // While regular expression is slower, it is the only way to identify with certainty
+    // that the inputs is composed of all numbers.
     if (timeStamp.match(/^\d+$/m)) return timeStamp;
     var obj = {};
     var testObj = {
         h: /(\d+)[hH]/,
         m: /(\d+)[mM]/,
-        s: /(\d+)[sS]/
+        s: /(\d+)([sS]|$)/
     };
     var temp;
     for (var reg in testObj) {
