@@ -13,7 +13,7 @@
                         <td>
                             <button onclick="addImage()" style="float: right;"><i id="addIcon" class="fa fa-skype"></i> Add</button>
                             <div style="overflow: hidden;">
-                                <input type="text" name="textArea" id="textArea" onkeyup="addImage()">
+                                <input type="text" name="textArea" id="textArea" onkeyup="if (event.keyCode == 13) addImage()">
                             </div>
                         </td>
                         <td id="imageArea">
