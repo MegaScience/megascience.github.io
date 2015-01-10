@@ -2,13 +2,13 @@ var imageArea = document.getElementById("imageArea");
 var newDIV, oldDIV, newImage, newURL, curURL, divList;
 
 function addImage() {
-    var name = document.getElementById("textArea").value;
-    if(name === null || name.trim() === "") return;
+    var name = document.getElementById("textArea").value.trim();
+    if(name === null || name === "") return;
     oldDIV = newDIV;
     newDIV = document.createElement("div");
     newURL = document.createElement("a");
     newImage = document.createElement("img");
-    curURL = "http://api.skype.com/users/" + name.trim() + "/profile/avatar";
+    curURL = "http://api.skype.com/users/" + name + "/profile/avatar";
     newURL.href = curURL;
     newURL.target = "_blank";
     newImage.src = curURL;
