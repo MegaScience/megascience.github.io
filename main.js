@@ -415,7 +415,8 @@ function writeTitle() {
 }
 
 function updateVideos() {
-    var tempParam = paramArray(window.location.hash, [/video[0-9]+/, /start[0-9]+/, /volume[0-9]+/, /mute[0-9]+/]);
+    //var tempParam = paramArray(window.location.hash, [/video[0-9]+/, /start[0-9]+/, /volume[0-9]+/, /mute[0-9]+/]);
+    var tempParam = paramArray(window.location.hash, [/(video|start|volume|mute)[0-9]+/]);
     if (!isEmpty(tempParam)) {
         for (var i = 0; i < player.length; i++) {
             //if (debug) debugInfo("Before settings: " + JSON.stringify(settings[i]));
