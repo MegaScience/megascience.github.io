@@ -105,8 +105,8 @@ function onPlayerStateChange(event) {
             stopVideos(event, 1);
             //elements.playPause.value = "Play";
             elements.playPause.text.innerHTML = "Play";
-            elements.playPause.icon.classList.remove("fa-youtube-play");
-            elements.playPause.icon.classList.add("fa-pause");
+            elements.playPause.icon.classList.remove("fa-pause");
+            elements.playPause.icon.classList.add("fa-youtube-play");
             break;
         case YT.PlayerState.PLAYING:
             //if (!done) {
