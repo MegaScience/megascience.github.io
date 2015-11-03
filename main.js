@@ -221,6 +221,7 @@ function stopVideos(event) {
         //if (seek) player[i].seekTo(time[i].value, !0);
         //player[i].stopVideo();
         player[i].seekTo(player[i].getDuration(), !0);
+        player[i].pauseVideo();
     }
 }
 
