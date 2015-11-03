@@ -220,7 +220,7 @@ function stopVideos(event) {
         if (event && event.target == player[i] || (state == -1 || state === 0)) continue;
         //if (seek) player[i].seekTo(time[i].value, !0);
         //player[i].stopVideo();
-        player[i].seekTo(player[i].getDuration() - 1, !0);
+        player[i].seekTo(player[i].getDuration(), !0);
     }
 }
 
